@@ -1,10 +1,11 @@
 import { Text, View } from 'react-native';
 
-const Home = () => {
+const AddBtn = () => {
   return (
     <View>
-      <Text>홈화면</Text>
+      <Text>Add</Text>
     </View>
   );
 };
-export default Home;
+
+export default AddBtn;

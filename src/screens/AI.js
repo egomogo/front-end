@@ -1,10 +1,10 @@
 import { Text, View } from 'react-native';
 
-const Home = () => {
+const AI = () => {
   return (
     <View>
-      <Text>홈화면</Text>
+      <Text>AI챗</Text>
     </View>
   );
 };
-export default Home;
+export default AI;
