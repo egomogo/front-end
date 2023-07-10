@@ -1,5 +1,6 @@
 import { Text } from 'react-native';
 import Container from '../common/Container';
+import KakaoMap from '../common/KakaoMap';
 import Modal from '../common/Modal';
 import CustomSlider from '../common/Slider';
 
@@ -12,6 +13,7 @@ const DistanceModal = ({
   return (
     <Modal visible={visible} onRequestClose={onRequestClose}>
       <Container>
+        <KakaoMap />
         <Text>추천 식당까지 거리 설정하기</Text>
         <CustomSlider
           width={200}
