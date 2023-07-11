@@ -14,14 +14,12 @@ const KakaoMap = ({ currentCoord, minute }) => {
   }, [minute]);
 
   var level;
-  if (minute == 5) {
-    level = 2;
-  } else if (minute == 10) {
-    level = 3;
-  } else if (minute == 15) {
+  if (minute <= 5) {
     level = 4;
-  } else {
-    level = 4;
+  } else if (minute <= 10) {
+    level = 5;
+  } else if (minute <= 20) {
+    level = 6;
   }
 
   return (
