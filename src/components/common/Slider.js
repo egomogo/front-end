@@ -12,6 +12,7 @@ import { Text, View } from 'react-native';
  * @param step 값 간격
  * @param showValue 슬라이더 하단에 값 표시 여부
  * @param text 값 옆에 적을 텍스트
+ * @param mainColor 메인 색상
  * @param onValueChange 값이 바뀔 때 실행되는 이벤트
  * @param onSlidingComplete 슬라이드 끝난 후 실행되는 이벤트
  */
@@ -23,6 +24,7 @@ const CustomSlider = ({
   step = 0,
   showValue,
   text,
+  mainColor = '#509AFB',
   onValueChange = () => {},
   onSlidingComplete = () => {},
 }) => {
@@ -35,11 +37,17 @@ const CustomSlider = ({
         minimumValue={minimumValue}
         maximumValue={maximumValue}
         step={step}
-        minimumTrackTintColor="#86B1E4"
-        maximumTrackTintColor="#EAEAEA"
+        minimumTrackTintColor={mainColor}
+        maximumTrackTintColor="#656565"
         trackStyle={{ width: width, height: 10, borderRadius: 30 }}
-        thumbTintColor="#FFFFFF"
-        thumbStyle={{ borderColor: '#509AFB', borderWidth: 5 }}
+        thumbTintColor={mainColor}
+        thumbStyle={{
+          width: 25,
+          height: 25,
+          borderColor: '#DDDDDD',
+          borderWidth: 7,
+          borderRadius: 50,
+        }}
         value={value}
         onValueChange={(newValue) => {
           onValueChange(newValue);

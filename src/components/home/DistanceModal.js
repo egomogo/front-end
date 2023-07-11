@@ -24,6 +24,7 @@ const DistanceModal = ({
           step={5}
           showValue
           text="분"
+          mainColor="#FF0000"
           onSlidingComplete={onSlidingComplete}
         />
       </Container>
