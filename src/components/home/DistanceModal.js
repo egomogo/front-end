@@ -5,21 +5,22 @@ import Modal from '../common/Modal';
 import CustomSlider from '../common/Slider';
 
 const DistanceModal = ({
+  currentCoord,
   visible,
   onRequestClose,
-  initialValue,
+  minute,
   onSlidingComplete,
 }) => {
   return (
     <Modal visible={visible} onRequestClose={onRequestClose}>
       <Container>
-        <KakaoMap />
+        <KakaoMap currentCoord={currentCoord} minute={minute} />
         <Text>추천 식당까지 거리 설정하기</Text>
         <CustomSlider
-          width={200}
-          initialValue={initialValue}
+          width={300}
+          initialValue={minute}
           minimumValue={5}
-          maximumValue={30}
+          maximumValue={20}
           step={5}
           showValue
           text="분"

@@ -49,7 +49,7 @@ const CustomSlider = ({
           onSlidingComplete(newValue);
         }}
       />
-      <Text>
+      <Text style={{ color: 'black' }}>
         {showValue && value}
         {text}
       </Text>

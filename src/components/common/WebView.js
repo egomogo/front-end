@@ -1,7 +1,7 @@
 import { WebView as DefaultWebView } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 
-const WebView = ({ uri, html }) => {
+const WebView = ({ uri }) => {
   return <DefaultWebView style={styles.webView} source={{ uri: uri }} />;
 };
 
