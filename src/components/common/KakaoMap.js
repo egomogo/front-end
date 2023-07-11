@@ -29,6 +29,7 @@ const KakaoMap = ({ currentCoord, minute }) => {
       source={{
         uri: 'https://2hanbyeol1.github.io/kakaomap/',
       }}
+      injectedJavaScript={`setCenter(${currentCoord.latitude}, ${currentCoord.longitude}); setRadius(${minute}, ${level});`}
     />
   );
 };
