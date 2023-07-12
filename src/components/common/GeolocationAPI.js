@@ -16,7 +16,7 @@ export function watchPosition(setCoord) {
       setCoord({ latitude: latitude, longitude: longitude });
     },
     (error) => {
-      console.log(error.code, error.message);
+      // console.log(error.code, error.message);
     },
     { enableHighAccuracy: true }
   );
