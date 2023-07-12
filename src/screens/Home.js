@@ -1,7 +1,7 @@
 import Container from '../components/common/Container';
 import DistanceButton from '../components/home/DistanceButton';
 import DistanceModal from '../components/home/DistanceModal';
-import { watchPosition } from '../components/common/GeolocationAPI';
+import { getCurrentPosition } from '../components/common/GeolocationAPI';
 import { useState } from 'react';
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
       <DistanceButton
         minute={minute}
         onPress={() => {
-          watchPosition(setCoord);
+          getCurrentPosition(setCoord);
           setVisible(true);
         }}
       />

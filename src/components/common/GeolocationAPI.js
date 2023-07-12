@@ -5,11 +5,8 @@ import Geolocation from '@react-native-community/geolocation';
  * @param setCoord 좌표를 설정하는 setState 함수
  */
 
-var watchId = null;
-
-export function watchPosition(setCoord) {
-  clearWatchPostiion();
-  watchId = Geolocation.watchPosition(
+export function getCurrentPosition(setCoord) {
+  Geolocation.getCurrentPosition(
     (info) => {
       const latitude = info.coords.latitude;
       const longitude = info.coords.longitude;
@@ -20,9 +17,4 @@ export function watchPosition(setCoord) {
     },
     { enableHighAccuracy: true }
   );
-}
-
-export function clearWatchPostiion() {
-  if (watchId != null) Geolocation.clearWatch(watchId);
-  watchId = null;
 }
