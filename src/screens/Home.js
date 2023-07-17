@@ -4,27 +4,31 @@ import Container from '../components/common/Container';
 import RandomButton from '../components/common/RandomButton';
 import DistanceButton from '../components/home/DistanceButton';
 import DistanceModal from '../components/home/DistanceModal';
+import { watchPosition } from '../components/common/GeolocationAPI';
 import { useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Home = () => {
   const [visible, setVisible] = useState(false);
   const [minute, setMinute] = useState(5);
+  const [coord, setCoord] = useState({ latitude: null, longitude: null });
 
   return (
     <Container>
       <DistanceButton
         minute={minute}
         onPress={() => {
+          watchPosition(setCoord);
           setVisible(true);
         }}
       />
       <DistanceModal
+        currentCoord={coord}
         visible={visible}
         onRequestClose={() => {
           setVisible(false);
         }}
-        initialValue={minute}
+        minute={minute}
         onSlidingComplete={(value) => setMinute(value)}
       />
       <View style={styles.homegridContainer}>
