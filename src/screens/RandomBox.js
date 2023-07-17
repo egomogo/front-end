@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { category, dummyData } from '../constants/Food';
+import { dummyData } from '../constants/Food';
 
 const RandomBox = ({ route }) => {
   const { category } = route.params;
@@ -10,16 +10,16 @@ const RandomBox = ({ route }) => {
     items[Math.floor(Math.random() * items.length)];
 
   return (
-    <View style={styles.RandomBoxBackcontainer}>
-      <Text style={styles.RandomBoxMainText}>소소식탁 명지대점 드가좌</Text>
+    <View style={styles.randomBoxBackcontainer}>
+      <Text style={styles.randomBoxMainText}>소소식탁 명지대점 드가좌</Text>
       <Swiper
         showsButtons={true}
-        nextButton={<Text style={styles.SwiperButtonText}>›</Text>}
-        prevButton={<Text style={styles.SwiperButtonText}>‹</Text>}
+        nextButton={<Text style={styles.swiperButtonText}>›</Text>}
+        prevButton={<Text style={styles.swiperButtonText}>‹</Text>}
       >
         {dummyData[category].map((item, index) => (
-          <View key={index} style={styles.RandomBoxContainer}>
-            <Text style={styles.RandomBoxtext}>
+          <View key={index} style={styles.randomBoxContainer}>
+            <Text style={styles.randomBoxtext}>
               {getRandomItem(dummyData[category])}
             </Text>
           </View>
@@ -30,12 +30,12 @@ const RandomBox = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
-  RandomBoxBackcontainer: {
+  randomBoxBackcontainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  RandomBoxContainer: {
+  randomBoxContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
@@ -52,17 +52,16 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-
-  RandomBoxtext: {
+  randomBoxtext: {
     color: '#000000',
     fontSize: 30,
     fontWeight: 'bold',
   },
-  SwiperButtonText: {
+  swiperButtonText: {
     fontSize: 100,
     color: '#F5F5F5',
   },
-  RandomBoxMainText: {
+  randomBoxMainText: {
     fontSize: 20,
     color: 'black',
   },
