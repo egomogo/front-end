@@ -1,12 +1,14 @@
 import { View, StyleSheet } from 'react-native';
 import RandomButton from '../common/RandomButton';
-import { category } from '../../constants/Food';
+import { foodCategory } from '../../constants/Food';
 
 const CategorySelect = () => {
   return (
     <View style={styles.homegridContainer}>
-      {Object.values(category).map((item) => {
-        return <RandomButton category={item} />;
+      {Object.values(foodCategory).map((item) => {
+        return (
+          <RandomButton key={item.name} category={item.name} img={item.img} />
+        );
       })}
     </View>
   );
