@@ -1,17 +1,22 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '../screens/Home';
-import RandomBox from '../screens/RandomBox';
+import { NavContents } from '../constants/NavContent';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="RandomBox" component={RandomBox} />
+      {NavContents.map((item) => {
+        return (
+          <Stack.Screen
+            key={item.name}
+            name={item.name}
+            component={item.component}
+          />
+        );
+      })}
     </Stack.Navigator>
   );
 };
 
 export default Navigation;
-
