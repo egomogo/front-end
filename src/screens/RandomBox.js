@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     width:300,
     height:300,
     margin:45,
-    shadowColor: "EAEAEA",
+    shadowColor: "#EAEAEA",
             shadowOffset: {
               width: 0,
               height: 2,
