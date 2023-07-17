@@ -1,4 +1,5 @@
 import { View, Modal as DefaultModal, StyleSheet } from 'react-native';
+import { ModalColor } from '../../constants/Color';
 
 /**
  * 모달
@@ -15,7 +16,7 @@ const Modal = ({ visible, onRequestClose, children }) => {
       onRequestClose={onRequestClose}
       transparent={true}
     >
-      <View style={styles.centeredView}>
+      <View style={styles.modalBackground}>
         <View style={styles.modalView}>{children}</View>
       </View>
     </DefaultModal>
@@ -23,20 +24,20 @@ const Modal = ({ visible, onRequestClose, children }) => {
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
+  modalBackground: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#00000099',
+    backgroundColor: ModalColor.background,
   },
   modalView: {
     flex: 0.5,
     margin: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: ModalColor.color,
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: ModalColor.shadow,
     shadowOffset: {
       width: 0,
       height: 2,

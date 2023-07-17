@@ -3,6 +3,7 @@ import Container from '../common/Container';
 import KakaoMap from '../common/KakaoMap';
 import Modal from '../common/Modal';
 import CustomSlider from '../common/Slider';
+import { SliderColor } from '../../constants/Color';
 
 const DistanceModal = ({
   currentCoord,
@@ -24,7 +25,7 @@ const DistanceModal = ({
           step={5}
           showValue
           text="분"
-          mainColor="#FF0000"
+          mainColor={SliderColor.mainRed}
           onSlidingComplete={onSlidingComplete}
         />
       </Container>
