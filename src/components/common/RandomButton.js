@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   randombuttonselected: {
     borderWidth: 2,
     borderColor: '#D1D1D6',
-    shadowColor: "F4F5F6",
+    shadowColor: "#F4F5F6",
         shadowOffset: {
         width: 0,
         height: 2,
