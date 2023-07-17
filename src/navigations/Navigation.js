@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator();
 const Navigation = () => {
   return (
     <Stack.Navigator>
-      {NavContents.map((item) => {
+      {Object.values(NavContents).map((item) => {
         return (
           <Stack.Screen
             key={item.name}
