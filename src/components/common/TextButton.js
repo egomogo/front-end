@@ -1,4 +1,6 @@
 import { Pressable, Text, StyleSheet } from 'react-native';
+import { ButtonColor } from '../../constants/Color';
+import { TextColor } from '../../constants/Color';
 
 /**
  * 텍스트 버튼
@@ -13,7 +15,11 @@ const TextButton = ({ text, onPress, disabled = false, children }) => {
   return (
     <Pressable
       style={({ pressed }) => [
-        { backgroundColor: disabled ? '#D6EAFF' : '#509AFB' },
+        {
+          backgroundColor: disabled
+            ? ButtonColor.disabled
+            : ButtonColor.default,
+        },
         styles.button,
       ]}
       onPress={onPress}
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   text: {
-    color: 'WHITE',
+    color: TextColor.light,
   },
 });
 
