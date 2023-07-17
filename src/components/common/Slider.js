@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Slider from 'react-native-slider';
 import { Text, View } from 'react-native';
+import { SliderColor } from '../../constants/Color';
+import { TextColor } from '../../constants/Color';
 
 /**
  * 슬라이더
@@ -24,7 +26,7 @@ const CustomSlider = ({
   step = 0,
   showValue,
   text,
-  mainColor = '#509AFB',
+  mainColor = SliderColor.mainDefault,
   onValueChange = () => {},
   onSlidingComplete = () => {},
 }) => {
@@ -38,13 +40,13 @@ const CustomSlider = ({
         maximumValue={maximumValue}
         step={step}
         minimumTrackTintColor={mainColor}
-        maximumTrackTintColor="#656565"
+        maximumTrackTintColor={SliderColor.maximumTrackTintColor}
         trackStyle={{ width: width, height: 10, borderRadius: 30 }}
         thumbTintColor={mainColor}
         thumbStyle={{
           width: 25,
           height: 25,
-          borderColor: '#DDDDDD',
+          borderColor: SliderColor.thumbBorder,
           borderWidth: 7,
           borderRadius: 50,
         }}
@@ -57,7 +59,7 @@ const CustomSlider = ({
           onSlidingComplete(newValue);
         }}
       />
-      <Text style={{ color: 'black' }}>
+      <Text style={{ color: TextColor.dark }}>
         {showValue && value}
         {text}
       </Text>
