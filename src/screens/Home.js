@@ -31,7 +31,7 @@ const Home = () => {
                <RandomButton category="분식"/>
               <RandomButton category="일식" />
               <RandomButton category="양식,아시안" />
-              <RandomButton category="고기" />
+              <RandomButton category="치킨" />
               <RandomButton category="ALL" />
               <RandomButton category="한식" />
               <RandomButton category="중식" />
@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
   homegridContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
     width:360,
     height:360,
-    shadowColor: "EAEAEA",
+    shadowColor: "#EAEAEA",
     shadowOffset: {
       width: 0,
       height: 2,

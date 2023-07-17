@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, Image, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import { category, dummyData } from '../constants';
 
 const RandomButton = ({ category }) => {
   const navigation = useNavigation();
@@ -20,26 +21,25 @@ const RandomButton = ({ category }) => {
   };
   let customStyle;
     switch(category) {
-      case '분식':
+      case category.KOREAN:
         customStyle = { borderTopLeftRadius: 30 };
         break;
-      case '양식,아시안':
+      case category.WESTERN_ASIAN:
         customStyle = { borderTopRightRadius: 30 };
         break;
-      case '중식':
+      case category.CHINESE:
         customStyle = { borderBottomLeftRadius: 30 };
         break;
-      case '간편식':
+      case category.SNACKS:
         customStyle = { borderBottomRightRadius: 30 };
         break;
-      case 'ALL':
+      case category.ALL:
         customStyle = { borderRadius: 30 };
         break;
       default:
         customStyle = {};
         break;
     }
-
   const imageSource = getImageForCategory(category);
 const buttonStyle = isSelected
     ? [styles.randombutton, customStyle, styles.randombuttonselected]
@@ -73,7 +73,7 @@ const getImageForCategory = (category) => {
           return require('../../../assets/japan.png');
     case '양식,아시안':
           return require('../../../assets/asia.png');
-    case '고기':
+    case '치킨':
           return require('../../../assets/meat.png');
     case '한식':
           return require('../../../assets/korea.png');
@@ -129,15 +129,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#D1D1D6',
     shadowColor: "F4F5F6",
-    shadowOffset: {
-    width: 0,
-    height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    },
-  });
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        },
+      });
 
-export default RandomButton;
-
+    export default RandomButton;
