@@ -11,7 +11,7 @@ import { useState } from 'react';
 const Home = () => {
   const [visible, setVisible] = useState(false);
   const [minute, setMinute] = useState(5);
-  const [coord, setCoord] = useState({ latitude: null, longitude: null });
+  const [coord, setCoord] = useState({ x: null, y: null });
 
   return (
     <Container>

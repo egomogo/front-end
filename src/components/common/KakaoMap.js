@@ -5,22 +5,13 @@ import { useEffect } from 'react';
 const KakaoMap = ({ currentCoord, minute }) => {
   useEffect(() => {
     this.webref.injectJavaScript(
-      `setCenter(${currentCoord.latitude}, ${currentCoord.longitude})`
+      `setCenter(${currentCoord.x}, ${currentCoord.y})`
     );
   }, [currentCoord]);
 
   useEffect(() => {
-    this.webref.injectJavaScript(`setRadius(${minute}, ${level});`);
+    if (minute) this.webref.injectJavaScript(`setMinute(${minute});`);
   }, [minute]);
-
-  var level;
-  if (minute <= 5) {
-    level = 4;
-  } else if (minute <= 10) {
-    level = 5;
-  } else if (minute <= 20) {
-    level = 6;
-  }
 
   return (
     <WebView
@@ -29,7 +20,7 @@ const KakaoMap = ({ currentCoord, minute }) => {
       source={{
         uri: 'https://2hanbyeol1.github.io/kakaomap/',
       }}
-      injectedJavaScript={`setCenter(${currentCoord.latitude}, ${currentCoord.longitude}); setRadius(${minute}, ${level});`}
+      injectedJavaScript={`setCenter(${currentCoord.x}, ${currentCoord.y}); setMinute(${minute});`}
     />
   );
 };
