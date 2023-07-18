@@ -6,11 +6,12 @@ const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
-    <Stack.Navigator
-      initialRouteName={'BottomNav'}
-      screenOptions={{ headerShown: false }}
-    >
-      <Stack.Screen name="BottomNav" component={BottomNav} />
+    <Stack.Navigator initialRouteName={'BottomNav'}>
+      <Stack.Screen
+        name="BottomNav"
+        component={BottomNav}
+        options={{ headerShown: false }}
+      />
       {Object.values(NavContents).map((item) => {
         return (
           <Stack.Screen
