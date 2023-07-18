@@ -4,17 +4,22 @@ import { foodCategory } from '../../constants/Food';
 
 const CategorySelect = () => {
   return (
-    <View style={styles.homegridContainer}>
-      {Object.values(foodCategory).map((item) => {
-        return (
-          <RandomButton key={item.name} category={item.name} img={item.img} />
-        );
-      })}
+    <View style={styles.container}>
+      <View style={styles.homegridContainer}>
+        {Object.values(foodCategory).map((item) => {
+          return (
+            <RandomButton key={item.name} category={item.name} img={item.img} />
+          );
+        })}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 0,
+  },
   homegridContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -24,13 +29,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 360,
     height: 360,
-    shadowColor: '#EAEAEA',
+    shadowColor: 'black',
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowRadius: 4,
     elevation: 5,
   },
 });
