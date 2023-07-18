@@ -38,6 +38,7 @@ const RandomBox = ({ route }) => {
                 price: '10,000',
               },
             ]}
+            coords={{ x: 37.5832798, y: 126.9231295 }}
             detail={detail}
             onPress={() => {
               setDetail(!detail);

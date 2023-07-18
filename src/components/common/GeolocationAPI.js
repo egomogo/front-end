@@ -10,7 +10,7 @@ export function getCurrentPosition(setCoord) {
     (info) => {
       const latitude = info.coords.latitude;
       const longitude = info.coords.longitude;
-      setCoord({ latitude: latitude, longitude: longitude });
+      setCoord({ x: latitude, y: longitude });
     },
     (error) => {
       // console.log(error.code, error.message);

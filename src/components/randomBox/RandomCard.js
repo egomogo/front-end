@@ -3,7 +3,15 @@ import LikeButton from '../common/LikeButton';
 import KakaoMap from '../common/KakaoMap';
 import { RandomCardColor } from '../../constants/Color';
 
-const RandomCard = ({ name, distance, address, menus, detail, onPress }) => {
+const RandomCard = ({
+  name,
+  distance,
+  address,
+  menus,
+  coords,
+  detail,
+  onPress,
+}) => {
   const MenuView = () => {
     return menus.map((item, index) => {
       return (
@@ -16,12 +24,7 @@ const RandomCard = ({ name, distance, address, menus, detail, onPress }) => {
   };
 
   const MapView = () => {
-    return (
-      <KakaoMap
-        currentCoord={{ latitude: 127.213123, longitude: 36.123132 }}
-        minute={5}
-      />
-    );
+    return <KakaoMap currentCoord={coords} />;
   };
 
   return (
@@ -31,6 +34,7 @@ const RandomCard = ({ name, distance, address, menus, detail, onPress }) => {
           style={[
             styles.cardContainer,
             {
+              width: detail ? 350 : 300,
               flex: detail ? 0.7 : 0,
             },
           ]}
@@ -59,7 +63,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: RandomCardColor.background,
     borderRadius: 30,
-    width: 300,
     padding: 30,
     shadowColor: RandomCardColor.shadow,
     shadowOffset: {
