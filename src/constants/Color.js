@@ -16,6 +16,8 @@ const Boulder = '#757373'; // inputbox-label
 const TransparentBlack = '#00000099';
 const Black = '#000000';
 
+export const BackGroundColor = White;
+
 export const SliderColor = {
   mainDefault: DodgerBlue,
   mainRed: Red,

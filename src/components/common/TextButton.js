@@ -36,7 +36,7 @@ const TextButton = ({ text, onPress, disabled = false, children }) => {
 const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 80,
-    paddingVertical: 5,
+    paddingVertical: 10,
     borderRadius: 50,
   },
   text: {
