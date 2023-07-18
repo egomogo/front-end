@@ -11,7 +11,6 @@ const Navigation = () => {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="BottomNav" component={BottomNav} />
-      {/* <Stack.Navigator>
       {Object.values(NavContents).map((item) => {
         return (
           <Stack.Screen
@@ -20,7 +19,7 @@ const Navigation = () => {
             component={item.component}
           />
         );
-      })} */}
+      })}
     </Stack.Navigator>
   );
 };
