@@ -40,3 +40,13 @@ export const ModalColor = {
   color: White,
   shadow: Black,
 };
+
+export const RandomCardColor = {
+  background: White,
+  shadow: Black,
+  name: Black,
+  distance: Black,
+  address: DodgerBlue,
+  menu: Boulder,
+  price: Bittersweet,
+};
