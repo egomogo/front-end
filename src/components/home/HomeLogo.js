@@ -11,7 +11,8 @@ const HomeLogo = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.2,
+    flex: 0.3,
+    justifyContent: 'flex-end',
   },
 });
 

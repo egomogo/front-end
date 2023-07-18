@@ -18,7 +18,7 @@ const CategorySelect = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0,
+    flex: 0.6,
   },
   homegridContainer: {
     flexDirection: 'row',
