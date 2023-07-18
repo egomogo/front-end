@@ -1,18 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import AI from '../screens/AI';
-import AddBtn from '../components/AddBtn';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import TabBar from '../components/TabBar';
 
 const Tab = createBottomTabNavigator();
 
 const BottomNav = () => {
   return (
-    <Tab.Navigator
-      initialRouteName={'home'}
-      tabBar={(props) => <TabBar {...props} />}
-    >
+    <Tab.Navigator initialRouteName={'home'}>
       <Tab.Screen
         name="home"
         component={Home}
@@ -21,7 +16,7 @@ const BottomNav = () => {
           tabBarIcon: () => <FontAwesome5 name="dice" size={24} />,
         }}
       />
-      <Tab.Screen name="PlaceholerScreen" component={AddBtn} />
+
       <Tab.Screen
         name="AI"
         component={AI}
