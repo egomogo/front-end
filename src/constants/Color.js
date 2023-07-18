@@ -38,3 +38,8 @@ export const ModalColor = {
   color: White,
   shadow: Black,
 };
+
+export const CardColor = {
+  background: White,
+  shadow: Black,
+};
