@@ -14,6 +14,7 @@ const DistanceButton = ({ onPress, minute }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 0.1,
+    justifyContent: 'center',
   },
 });
 
