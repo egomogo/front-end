@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '../components/common/Container';
-import Logo from '../components/common/Logo';
+import HomeLogo from '../components/home/HomeLogo';
 import DistanceButton from '../components/home/DistanceButton';
 import DistanceModal from '../components/home/DistanceModal';
 import CategorySelect from '../components/home/CategorySelect';
@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <Container>
-      <Logo />
+      <HomeLogo />
       <DistanceButton
         minute={minute}
         onPress={() => {
