@@ -1,11 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import BottomNav from './BottomNav';
 import { NavContents } from '../constants/NavContent';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName={'BottomNav'}
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="BottomNav" component={BottomNav} />
       {Object.values(NavContents).map((item) => {
         return (
           <Stack.Screen
