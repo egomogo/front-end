@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 import { useEffect } from 'react';
 
 const KakaoMap = ({ currentCoord, minute }) => {
-  console.log(currentCoord);
-  console.log(minute);
   useEffect(() => {
     this.webref.injectJavaScript(
       `setCenter(${currentCoord.x}, ${currentCoord.y})`
