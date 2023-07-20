@@ -8,7 +8,6 @@ import { dummyData } from '../constants/Food';
 
 const RandomBox = ({ route }) => {
   const { category } = route.params;
-
   const [detail, setDetail] = useState(false);
 
   return (
@@ -55,16 +54,19 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+
   },
   swiperButtonText: {
     fontSize: 30,
     color: 'black',
   },
+
   randomBoxMainText: {
     fontSize: 35,
     color: 'black',
     fontWeight: 'bold',
   },
 });
+
 
 export default RandomBox;
