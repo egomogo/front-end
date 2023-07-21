@@ -13,14 +13,15 @@ const RandomCard = ({
   onPress,
 }) => {
   const MenuView = () => {
-    return menus.map((item, index) => {
-      return (
-        <View key={index} style={styles.row}>
-          <Text style={styles.menu}>{item.name}</Text>
-          <Text style={styles.price}>{item.price}원</Text>
-        </View>
-      );
-    });
+    menus &&
+      menus.map((item, index) => {
+        return (
+          <View key={index} style={styles.row}>
+            <Text style={styles.menu}>{item.name}</Text>
+            <Text style={styles.price}>{item.price}원</Text>
+          </View>
+        );
+      });
   };
 
   const MapView = () => {

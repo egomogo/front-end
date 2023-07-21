@@ -6,12 +6,16 @@ import DistanceModal from '../components/home/DistanceModal';
 import CategorySelect from '../components/home/CategorySelect';
 import { getCurrentPosition } from '../components/common/GeolocationAPI';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { minuteState, xState, yState } from '../atom';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Home = () => {
   const [visible, setVisible] = useState(false);
-  const [minute, setMinute] = useState(5);
+  const [minute, setMinute] = useRecoilState(minuteState);
   const [coord, setCoord] = useState({ x: null, y: null });
+  const [x, setX] = useRecoilState(xState);
+  const [y, setY] = useRecoilState(yState);
 
   return (
     <Container>
@@ -19,7 +23,7 @@ const Home = () => {
       <DistanceButton
         minute={minute}
         onPress={() => {
-          getCurrentPosition(setCoord);
+          getCurrentPosition(setCoord, setX, setY);
           setVisible(true);
         }}
       />

@@ -1,16 +1,40 @@
-import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { dummyData } from '../constants/Food';
+import { getRandomRestaurant } from '../axios/Random';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { distanceLimitState, xState, yState } from '../atom';
 
 const RandomBox = ({ route }) => {
   const { category } = route.params;
 
   const [detail, setDetail] = useState(false);
+  const [x, setX] = useRecoilState(xState);
+  const [y, setY] = useRecoilState(yState);
+  const distanceLimit = useRecoilValue(distanceLimitState);
+  const [data, setData] = useState([]);
+  const seed = 1;
 
+  useEffect(() => {
+    getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
+      (res) => {
+        setData(res.data.documents);
+        // console.log(res.data.documents);
+      }
+    );
+    // .catch((error) =>
+    //   console.log(
+    //     error.code,
+    //     error.message,
+    //     error.response.data,
+    //     error.response.status,
+    //     error.response.headers
+    //   )
+    // );
+  }, []);
   return (
     <Container>
       {!detail && (
@@ -22,22 +46,24 @@ const RandomBox = ({ route }) => {
         nextButton={<Text style={styles.swiperButtonText}>›</Text>}
         prevButton={<Text style={styles.swiperButtonText}>‹</Text>}
       >
-        {dummyData[category].map((item, index) => (
+        {data.map((restuarant) =>
+          console.log(
+            !restuarant.menus
+              ? '메뉴 정보 없음'
+              : restuarant?.menus?.map((menu) => {
+                  console.log(
+                    typeof menu === 'string' ? menu : '메뉴 정보 없음'
+                  );
+                })
+          )
+        )}
+        {data.map((restuarant, index) => (
           <RandomCard
             key={index}
-            name={item}
-            distance={1.9}
-            address={'서울특별시 서대문구 증가로12길'}
-            menus={[
-              {
-                name: '돈까스',
-                price: '8,000',
-              },
-              {
-                name: '치킨',
-                price: '10,000',
-              },
-            ]}
+            name={restuarant.name}
+            distance={restuarant.distance}
+            address={restuarant.address}
+            menus={restuarant.menus}
             coords={{ x: 37.5832798, y: 126.9231295 }}
             detail={detail}
             onPress={() => {
