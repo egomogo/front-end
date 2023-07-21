@@ -18,7 +18,10 @@ const RandomCard = ({
         return (
           <View key={index} style={styles.row}>
             <Text style={styles.menu}>{item.name}</Text>
-            <Text style={styles.price}>{item.price}원</Text>
+            <Text style={styles.price}>
+              {item.price}
+              {!isNaN(item.price.replace(/,/g, '')) && '원'}
+            </Text>
           </View>
         );
       })
