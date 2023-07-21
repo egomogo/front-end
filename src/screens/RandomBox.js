@@ -3,7 +3,6 @@ import Swiper from 'react-native-swiper';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import { useState, useEffect } from 'react';
-import { dummyData } from '../constants/Food';
 import { getRandomRestaurant } from '../axios/Random';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { distanceLimitState, xState, yState } from '../atom';
@@ -22,18 +21,8 @@ const RandomBox = ({ route }) => {
     getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
       (res) => {
         setData(res.data.documents);
-        // console.log(res.data.documents);
       }
     );
-    // .catch((error) =>
-    //   console.log(
-    //     error.code,
-    //     error.message,
-    //     error.response.data,
-    //     error.response.status,
-    //     error.response.headers
-    //   )
-    // );
   }, []);
   return (
     <Container>
@@ -46,17 +35,6 @@ const RandomBox = ({ route }) => {
         nextButton={<Text style={styles.swiperButtonText}>›</Text>}
         prevButton={<Text style={styles.swiperButtonText}>‹</Text>}
       >
-        {data.map((restuarant) =>
-          console.log(
-            !restuarant.menus
-              ? '메뉴 정보 없음'
-              : restuarant?.menus?.map((menu) => {
-                  console.log(
-                    typeof menu === 'string' ? menu : '메뉴 정보 없음'
-                  );
-                })
-          )
-        )}
         {data.map((restuarant, index) => (
           <RandomCard
             key={index}
@@ -64,7 +42,7 @@ const RandomBox = ({ route }) => {
             distance={restuarant.distance}
             address={restuarant.address}
             menus={restuarant.menus}
-            coords={{ x: 37.5832798, y: 126.9231295 }}
+            coords={restuarant.coords}
             detail={detail}
             onPress={() => {
               setDetail(!detail);
