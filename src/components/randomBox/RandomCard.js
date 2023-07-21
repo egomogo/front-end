@@ -33,7 +33,7 @@ const RandomCard = ({
   };
 
   const MapView = () => {
-    return <KakaoMap currentCoord={{ y: coords.x, x: coords.y }} />;
+    return <KakaoMap currentCoord={coords} />;
   };
 
   return (
