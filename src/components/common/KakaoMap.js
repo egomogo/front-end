@@ -20,7 +20,7 @@ const KakaoMap = ({ currentCoord, minute }) => {
       source={{
         uri: 'https://2hanbyeol1.github.io/kakaomap/',
       }}
-      injectedJavaScript={`setCenter(${currentCoord.x}, ${currentCoord.y}); setMinute(${minute});`}
+      injectedJavaScript={`setCenter(${currentCoord.y}, ${currentCoord.x}); setMinute(${minute});`}
     />
   );
 };

@@ -8,9 +8,9 @@ import cafe from '../../assets/cafe.png';
 import fast_food from '../../assets/fast_food.png';
 
 export const foodCategory = {
-  KOREAN: { name: '한식', img: korea },
-  JAPANESE: { name: '일식', img: japan },
-  CHINESE: { name: '중식', img: china },
+  KOREAN: { name: 'KOREAN', img: korea },
+  JAPANESE: { name: 'JAPANESE', img: japan },
+  CHINESE: { name: 'CHINESE', img: china },
   WESTERN_ASIAN: { name: '양식/아시안', img: asia },
   ALL: { name: 'ALL', img: null },
   CHICKEN: { name: '치킨', img: meat },
@@ -41,3 +41,12 @@ export const dummyData = {
   ],
   [foodCategory.FASTFOOD.name]: ['삼각김밥', '도시락'],
 };
+
+// ROOT,
+//     KOREAN, SEA_FOOD, MEAT, NODDLE, RAW_FISH, PORRIDGE, KOREAN_STEW,
+//     JAPANESE, TUNA_SASHIMI, SUSHI, PORK_CUTLET_UDON, RAMEN,
+//     ALCOHOL, INDOOR_STALLS, HOF_PUB, WINE_BAR, IZAKAYA, COCKTAIL_BAR, SHABU_SHABU, DRIVERS,
+//     ASIAN, SOUTH_EAST_ASIAN, INDIAN, CHINESE, LAMB_SKEWERS, LUNCH_BOX, FAST_FOOD,
+//     SANDWICH, CAFE_DESSERT, BAKERY, RICE_CAKE, ICE_CREAM, DONUT, TOAST, CHICKEN,
+//     SCHOOL_FOOD, WESTERN_FOOD, ITALY, PIZZA, BURGER, STEAK_RIB, MEXICAN, SALAD,
+//     OTHER;

@@ -13,14 +13,20 @@ const RandomCard = ({
   onPress,
 }) => {
   const MenuView = () => {
-    return menus.map((item, index) => {
-      return (
-        <View key={index} style={styles.row}>
-          <Text style={styles.menu}>{item.name}</Text>
-          <Text style={styles.price}>{item.price}원</Text>
-        </View>
-      );
-    });
+    return menus ? (
+      menus.map((item, index) => {
+        return (
+          <View key={index} style={styles.row}>
+            <Text style={styles.menu}>{item.name}</Text>
+            <Text style={styles.price}>{item.price}원</Text>
+          </View>
+        );
+      })
+    ) : (
+      <View>
+        <Text style={styles.menu}>메뉴 정보 없음</Text>
+      </View>
+    );
   };
 
   const MapView = () => {
@@ -82,7 +88,7 @@ const styles = StyleSheet.create({
   },
   name: {
     color: RandomCardColor.name,
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 'bold',
   },
   distance: {
@@ -98,12 +104,12 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   menu: {
-    width: 70,
+    width: 160,
     color: RandomCardColor.menu,
-    fontSize: 23,
+    fontSize: 20,
     fontWeight: 'bold',
   },
-  price: { color: RandomCardColor.price, fontSize: 23, fontWeight: 'bold' },
+  price: { color: RandomCardColor.price, fontSize: 20, fontWeight: 'bold' },
 });
 
 export default RandomCard;
