@@ -13,7 +13,6 @@ import { minuteState, xState, yState } from '../atom';
 const Home = () => {
   const [visible, setVisible] = useState(false);
   const [minute, setMinute] = useRecoilState(minuteState);
-  const [coord, setCoord] = useState({ x: null, y: null });
   const [x, setX] = useRecoilState(xState);
   const [y, setY] = useRecoilState(yState);
 
@@ -23,12 +22,12 @@ const Home = () => {
       <DistanceButton
         minute={minute}
         onPress={() => {
-          getCurrentPosition(setCoord, setX, setY);
+          getCurrentPosition(setX, setY);
           setVisible(true);
         }}
       />
       <DistanceModal
-        currentCoord={coord}
+        currentCoord={{ x: x, y: y }}
         visible={visible}
         onRequestClose={() => {
           setVisible(false);

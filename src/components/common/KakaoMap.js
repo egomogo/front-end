@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const KakaoMap = ({ currentCoord, minute }) => {
   useEffect(() => {
     this.webref.injectJavaScript(
-      `setCenter(${currentCoord.x}, ${currentCoord.y})`
+      `setCenter(${currentCoord.x}, ${currentCoord.y});`
     );
   }, [currentCoord]);
 
