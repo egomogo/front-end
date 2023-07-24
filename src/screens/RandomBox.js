@@ -1,55 +1,83 @@
-import { Text, StyleSheet } from 'react-native';
-import Swiper from 'react-native-swiper';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
-import { useState, useEffect } from 'react';
 import { getRandomRestaurant } from '../axios/Random';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { distanceLimitState, xState, yState } from '../atom';
+import HomeLogo from '../components/home/HomeLogo';
 
-const RandomBox = ({ route }) => {
+const { width: viewportWidth } = Dimensions.get('window');
+const itemWidth = viewportWidth - 60;
+const padding = viewportWidth - itemWidth;
+
+const RandomBox = ({ route, navigation }) => {
   const { category } = route.params;
 
-  const [detail, setDetail] = useState(false);
   const [x, setX] = useRecoilState(xState);
   const [y, setY] = useRecoilState(yState);
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
+  const [details, setDetails] = useState([]);
   const seed = 1;
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
 
   useEffect(() => {
     getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
       (res) => {
-        setData(res.data.documents);
+        const updatedData = res.data.documents.map((item) => ({
+          ...item,
+          detail: false,
+        }));
+        setData(updatedData);
+        setDetails(new Array(updatedData.length).fill(false));
       }
     );
   }, []);
+
+  const toggleDetail = (index) => {
+    const newDetails = [...details];
+    newDetails[index] = !newDetails[index];
+    setDetails(newDetails);
+  };
+
+  const _renderItem = ({ item, index }) => (
+    <View style={{ width: itemWidth }}>
+      <RandomCard
+        key={index}
+        name={item.name}
+        distance={item.distance}
+        address={item.address}
+        menus={item.menus}
+        coords={item.coords}
+        detail={details[index]}
+        onPress={() => toggleDetail(index)}
+      />
+    </View>
+  );
+
   return (
     <Container>
-      {!detail && (
-        <Text style={styles.randomBoxMainText}>소소식탁 명지대점 드가좌</Text>
-      )}
-      <Swiper
-        style={styles.swiper}
-        showsButtons={true}
-        nextButton={<Text style={styles.swiperButtonText}>›</Text>}
-        prevButton={<Text style={styles.swiperButtonText}>‹</Text>}
-      >
-        {data.map((restuarant, index) => (
-          <RandomCard
-            key={index}
-            name={restuarant.name}
-            distance={restuarant.distance}
-            address={restuarant.address}
-            menus={restuarant.menus}
-            coords={restuarant.coords}
-            detail={detail}
-            onPress={() => {
-              setDetail(!detail);
-            }}
-          />
-        ))}
-      </Swiper>
+      <HomeLogo navigation={navigation} />
+      <FlatList
+        data={data}
+        renderItem={_renderItem}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        snapToInterval={itemWidth}
+        snapToAlignment="start"
+        decelerationRate="fast"
+        pagingEnabled
+        contentContainerStyle={{
+          paddingHorizontal: padding / 2,
+        }}
+        onMomentumScrollEnd={() => setDetails(new Array(data.length).fill(false))}
+      />
     </Container>
   );
 };
@@ -63,11 +91,6 @@ const styles = StyleSheet.create({
   swiperButtonText: {
     fontSize: 30,
     color: 'black',
-  },
-  randomBoxMainText: {
-    fontSize: 35,
-    color: 'black',
-    fontWeight: 'bold',
   },
 });
 
