@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import LikeButton from '../common/LikeButton';
 import KakaoMap from '../common/KakaoMap';
 import { RandomCardColor } from '../../constants/Color';
-import HomeLogo from '../../components/home/HomeLogo';
 
 const RandomCard = ({
   name,
@@ -14,7 +12,6 @@ const RandomCard = ({
   detail,
   onPress,
 }) => {
-
   const MenuView = () => {
     return menus ? (
       menus.map((item, index) => {
@@ -41,7 +38,7 @@ const RandomCard = ({
 
   return (
     <View style={styles.container}>
-       <Pressable onPress={onPress}>
+      <Pressable onPress={onPress}>
         <View
           style={[
             styles.cardContainer,
@@ -73,11 +70,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  mapAndMenuContainer: {
-    position: 'relative',
-    height: '100%',
-    width: '100%',
-  },
   cardContainer: {
     backgroundColor: RandomCardColor.background,
     borderRadius: 30,
@@ -94,13 +86,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-
   },
-  rowend:{
-   flexDirection: 'row',
-   justifyContent: 'flex-end',
+  rowend: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
-
   spaceBetween: {
     justifyContent: 'space-between',
   },

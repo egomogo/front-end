@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
+import { View, Dimensions, FlatList } from 'react-native';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import { getRandomRestaurant } from '../axios/Random';
@@ -76,22 +76,12 @@ const RandomBox = ({ route, navigation }) => {
         contentContainerStyle={{
           paddingHorizontal: padding / 2,
         }}
-        onMomentumScrollEnd={() => setDetails(new Array(data.length).fill(false))}
+        onMomentumScrollEnd={() =>
+          setDetails(new Array(data.length).fill(false))
+        }
       />
     </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  swiper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  swiperButtonText: {
-    fontSize: 30,
-    color: 'black',
-  },
-});
 
 export default RandomBox;
