@@ -2,6 +2,8 @@ import { Text, StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
+import Toast from '../components/common/Toast';
+import { NULL_DATA } from '../constants/Error';
 import { useState, useEffect } from 'react';
 import { getRandomRestaurant } from '../axios/Random';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -20,6 +22,11 @@ const RandomBox = ({ route }) => {
   useEffect(() => {
     getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
       (res) => {
+        if (res.data.documents.length === 0) {
+          Toast({
+            text: NULL_DATA,
+          });
+        }
         setData(res.data.documents);
       }
     );
