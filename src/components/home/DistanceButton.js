@@ -1,7 +1,10 @@
 import TextButton from '../common/TextButton';
 import { View, StyleSheet } from 'react-native';
+import { useRecoilState } from 'recoil';
+import { minuteState } from '../../atom';
 
-const DistanceButton = ({ onPress, minute }) => {
+const DistanceButton = ({ onPress }) => {
+  const [minute, setMinute] = useRecoilState(minuteState);
   return (
     <View style={styles.container}>
       <TextButton width={30} onPress={onPress}>

@@ -3,15 +3,15 @@ import Container from '../common/Container';
 import KakaoMap from '../common/KakaoMap';
 import Modal from '../common/Modal';
 import CustomSlider from '../common/Slider';
+import TextButton from '../common/TextButton';
 import { SliderColor } from '../../constants/Color';
+import { useRecoilState } from 'recoil';
+import { minuteState } from '../../atom';
 
-const DistanceModal = ({
-  currentCoord,
-  visible,
-  onRequestClose,
-  minute,
-  onSlidingComplete,
-}) => {
+const DistanceModal = ({ currentCoord, visible, onRequestClose }) => {
+  const [minute, setMinute] = useRecoilState(minuteState);
+  let sliderMinute = minute;
+
   return (
     <Modal visible={visible} onRequestClose={onRequestClose}>
       <Container>
@@ -26,8 +26,18 @@ const DistanceModal = ({
           showValue
           text="분"
           mainColor={SliderColor.mainRed}
-          onSlidingComplete={onSlidingComplete}
+          onSlidingComplete={(value) => {
+            sliderMinute = value;
+          }}
         />
+        <TextButton
+          onPress={() => {
+            setMinute(sliderMinute);
+            onRequestClose();
+          }}
+        >
+          확인
+        </TextButton>
       </Container>
     </Modal>
   );

@@ -12,7 +12,6 @@ import { minuteState, xState, yState } from '../atom';
 
 const Home = () => {
   const [visible, setVisible] = useState(false);
-  const [minute, setMinute] = useRecoilState(minuteState);
   const [x, setX] = useRecoilState(xState);
   const [y, setY] = useRecoilState(yState);
 
@@ -20,7 +19,6 @@ const Home = () => {
     <Container>
       <HomeLogo />
       <DistanceButton
-        minute={minute}
         onPress={() => {
           getCurrentPosition(setX, setY);
           setVisible(true);
@@ -32,8 +30,6 @@ const Home = () => {
         onRequestClose={() => {
           setVisible(false);
         }}
-        minute={minute}
-        onSlidingComplete={(value) => setMinute(value)}
       />
       <CategorySelect />
     </Container>
