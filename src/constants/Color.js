@@ -50,3 +50,8 @@ export const RandomCardColor = {
   menu: Boulder,
   price: Bittersweet,
 };
+
+export const ToastColor = {
+  background: TransparentBlack,
+  color: White,
+};
