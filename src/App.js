@@ -1,12 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
-import Navigation from './navigations/Navigation';
 import { RecoilRoot } from 'recoil';
+import BottomNav from './navigations/BottomNav';
 
 const App = () => {
   return (
     <RecoilRoot>
       <NavigationContainer>
-        <Navigation />
+        <BottomNav />
       </NavigationContainer>
     </RecoilRoot>
   );
