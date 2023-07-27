@@ -17,7 +17,10 @@ const RandomBox = ({ route }) => {
   const [y, setY] = useRecoilState(yState);
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
-  const seed = 1;
+  const MAX_NUM = 100000;
+  const MIN_NUM = 1;
+
+  const seed = Math.floor(Math.random() * (MAX_NUM - MIN_NUM) + MIN_NUM);
 
   useEffect(() => {
     getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
