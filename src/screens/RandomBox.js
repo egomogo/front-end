@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Dimensions, FlatList } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Animated, Dimensions } from 'react-native';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import { getRandomRestaurant } from '../axios/Random';
@@ -8,8 +8,8 @@ import { distanceLimitState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
 
 const { width: viewportWidth } = Dimensions.get('window');
-const itemWidth = viewportWidth - 60;
-const padding = viewportWidth - itemWidth;
+const itemWidth = viewportWidth/1.3;
+const cardMargin = 25;
 
 const RandomBox = ({ route, navigation }) => {
   const { category } = route.params;
@@ -20,6 +20,9 @@ const RandomBox = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [details, setDetails] = useState([]);
   const seed = 1;
+
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     navigation.setOptions({
@@ -40,46 +43,63 @@ const RandomBox = ({ route, navigation }) => {
     );
   }, []);
 
+  useEffect(() => {
+    const listener = scrollX.addListener(({ value }) => {
+      const newIndex = Math.round(value / (itemWidth + cardMargin));
+      if (newIndex !== currentIndex) {
+        setDetails(new Array(data.length).fill(false));
+        setCurrentIndex(newIndex);
+      }
+    });
+
+    return () => {
+      scrollX.removeListener(listener);
+    };
+  }, [currentIndex, data.length]);
+
   const toggleDetail = (index) => {
     const newDetails = [...details];
     newDetails[index] = !newDetails[index];
     setDetails(newDetails);
   };
 
-  const _renderItem = ({ item, index }) => (
-    <View style={{ width: itemWidth }}>
-      <RandomCard
-        key={index}
-        name={item.name}
-        distance={item.distance}
-        address={item.address}
-        menus={item.menus}
-        coords={item.coords}
-        detail={details[index]}
-        onPress={() => toggleDetail(index)}
-      />
-    </View>
-  );
-
   return (
     <Container>
       <HomeLogo navigation={navigation} />
-      <FlatList
-        data={data}
-        renderItem={_renderItem}
+      <Animated.ScrollView
         horizontal
-        showsHorizontalScrollIndicator={false}
-        snapToInterval={itemWidth}
-        snapToAlignment="start"
-        decelerationRate="fast"
         pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        snapToInterval={itemWidth + cardMargin}
+        snapToAlignment={"start"}
+        decelerationRate={0}
+        onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+          useNativeDriver: false,
+        })}
         contentContainerStyle={{
-          paddingHorizontal: padding / 2,
+          paddingHorizontal: (viewportWidth - itemWidth) / 2.2,
+          paddingLeft: (viewportWidth - itemWidth) /8 + cardMargin,
         }}
-        onMomentumScrollEnd={() =>
-          setDetails(new Array(data.length).fill(false))
-        }
-      />
+      >
+        {data.map((item, index) => (
+          <View
+            style={{
+              width: itemWidth + (index === 0 ? cardMargin : cardMargin),
+            }}
+            key={index}
+          >
+            <RandomCard
+              name={item.name}
+              distance={item.distance}
+              address={item.address}
+              menus={item.menus}
+              coords={item.coords}
+              detail={details[index]}
+              onPress={() => toggleDetail(index)}
+            />
+          </View>
+        ))}
+      </Animated.ScrollView>
     </Container>
   );
 };
