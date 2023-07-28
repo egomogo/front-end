@@ -4,7 +4,6 @@ import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import Toast from '../components/common/Toast';
 import { NULL_DATA } from '../constants/Error';
-import { useState, useEffect } from 'react';
 import { getRandomRestaurant } from '../axios/Random';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { distanceLimitState, xState, yState } from '../atom';
