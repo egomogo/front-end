@@ -2,13 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Animated, Dimensions } from 'react-native';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
+import Toast from '../components/common/Toast';
+import { NULL_DATA } from '../constants/Error';
+import { useState, useEffect } from 'react';
 import { getRandomRestaurant } from '../axios/Random';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { distanceLimitState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
 
 const { width: viewportWidth } = Dimensions.get('window');
-const itemWidth = viewportWidth/1.3;
+const itemWidth = viewportWidth / 1.3;
 const cardMargin = 25;
 
 const RandomBox = ({ route, navigation }) => {
@@ -19,7 +22,9 @@ const RandomBox = ({ route, navigation }) => {
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
   const [details, setDetails] = useState([]);
-  const seed = 1;
+  const MAX_NUM = 100000;
+  const MIN_NUM = 1;
+  const seed = Math.floor(Math.random() * (MAX_NUM - MIN_NUM) + MIN_NUM);
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,6 +38,12 @@ const RandomBox = ({ route, navigation }) => {
   useEffect(() => {
     getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
       (res) => {
+        if (res.data.documents.length === 0) {
+          Toast({
+            text: NULL_DATA,
+          });
+        }
+        
         const updatedData = res.data.documents.map((item) => ({
           ...item,
           detail: false,
@@ -71,14 +82,17 @@ const RandomBox = ({ route, navigation }) => {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         snapToInterval={itemWidth + cardMargin}
-        snapToAlignment={"start"}
+        snapToAlignment={'start'}
         decelerationRate={0}
-        onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
-          useNativeDriver: false,
-        })}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          {
+            useNativeDriver: false,
+          }
+        )}
         contentContainerStyle={{
           paddingHorizontal: (viewportWidth - itemWidth) / 2.2,
-          paddingLeft: (viewportWidth - itemWidth) /8 + cardMargin,
+          paddingLeft: (viewportWidth - itemWidth) / 8 + cardMargin,
         }}
       >
         {data.map((item, index) => (

@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
 import AI from '../screens/AI';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { RandomStack } from './StackNav';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,7 +13,7 @@ const BottomNav = () => {
     >
       <Tab.Screen
         name="home"
-        component={Home}
+        component={RandomStack}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: () => <FontAwesome5 name="dice" size={24} />,

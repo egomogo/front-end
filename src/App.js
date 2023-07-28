@@ -1,14 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
-import Navigation from './navigations/Navigation';
 import { RecoilRoot } from 'recoil';
+import Toast from 'react-native-toast-message';
+import { toastConfig } from './components/common/Toast';
+import BottomNav from './navigations/BottomNav';
 
 const App = () => {
   return (
-    <RecoilRoot>
-      <NavigationContainer>
-        <Navigation />
-      </NavigationContainer>
-    </RecoilRoot>
+    <>
+      <RecoilRoot>
+        <NavigationContainer>
+          <BottomNav />
+        </NavigationContainer>
+      </RecoilRoot>
+      <Toast config={toastConfig} />
+  </>
   );
 };
 

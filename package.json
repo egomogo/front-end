@@ -27,6 +27,7 @@
     "react-native-slider": "^0.11.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-swiper": "^1.6.0",
+    "react-native-toast-message": "^2.1.6",
     "react-native-vector-icons": "^9.2.0",
     "react-native-webview": "^13.2.2",
     "recoil": "^0.7.7"
