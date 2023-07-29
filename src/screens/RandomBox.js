@@ -25,6 +25,10 @@ const RandomBox = ({ route }) => {
   const seed = Math.floor(Math.random() * (MAX_NUM - MIN_NUM) + MIN_NUM);
 
   useEffect(() => {
+    getRestaurant();
+  }, []);
+
+  const getRestaurant = () => {
     getRandomRestaurant(seed, category, x, y, distanceLimit, number, size).then(
       (res) => {
         if (res.data.documents.length === 0) {
@@ -33,10 +37,9 @@ const RandomBox = ({ route }) => {
           });
         }
         setData(res.data.documents);
-        console.log(res.data.meta);
       }
     );
-  }, []);
+  };
   return (
     <Container>
       {!detail && (
@@ -46,8 +49,19 @@ const RandomBox = ({ route }) => {
         style={styles.swiper}
         showsButtons={true}
         onIndexChanged={(index) => {
-          if (index === 0) Alert.alert('추천다시하실?');
-          console.log(index);
+          if (index === 0) {
+            Alert.alert(
+              '첫 페이지입니다',
+              '새로 추천받으시겠습니까?',
+              [
+                {
+                  text: '그대로 있기',
+                },
+                { text: '새로 추천하기', onPress: () => getRestaurant() },
+              ],
+              { cancelable: false }
+            );
+          }
         }}
         nextButton={<Text style={styles.swiperButtonText}>›</Text>}
         prevButton={<Text style={styles.swiperButtonText}>‹</Text>}
