@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, Image, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { NavContents } from '../../constants/NavContent';
-import { foodCategory, dummyData } from '../../constants/Food';
+import { foodCategory } from '../../constants/Food';
 
 const RandomButton = ({ category, img }) => {
   const navigation = useNavigation();

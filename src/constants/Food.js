@@ -19,29 +19,6 @@ export const foodCategory = {
   FASTFOOD: { name: '패스트푸드', img: fast_food },
 };
 
-export const dummyData = {
-  [foodCategory.KOREAN.name]: [
-    '떡볶이',
-    '김밥',
-    '라면',
-    '비빔밥',
-    '육회비빔밥',
-  ],
-  [foodCategory.JAPANESE.name]: ['초밥', '라멘'],
-  [foodCategory.CHINESE.name]: ['짜장면', '짬뽕'],
-  [foodCategory.WESTERN_ASIAN.name]: ['파스타', '피자'],
-  [foodCategory.CHICKEN.name]: ['땅땅치킨', '교촌'],
-  [foodCategory.ALL.name]: ['햄버거', '핫도그'],
-  [foodCategory.SNACKS.name]: ['떡볶이', '핫도그', '어묵'],
-  [foodCategory.CAFE.name]: [
-    '아메리카노',
-    '카페라떼',
-    '카푸치노',
-    '플랫화이트',
-  ],
-  [foodCategory.FASTFOOD.name]: ['삼각김밥', '도시락'],
-};
-
 // ROOT,
 //     KOREAN, SEA_FOOD, MEAT, NODDLE, RAW_FISH, PORRIDGE, KOREAN_STEW,
 //     JAPANESE, TUNA_SASHIMI, SUSHI, PORK_CUTLET_UDON, RAMEN,
