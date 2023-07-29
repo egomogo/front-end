@@ -1,10 +1,12 @@
 import Logo from '../common/Logo';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
-const HomeLogo = () => {
+const HomeLogo = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Logo />
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <Logo />
+      </TouchableOpacity>
     </View>
   );
 };
