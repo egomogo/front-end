@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { NavContents } from '../../constants/NavContent';
 import { foodCategory } from '../../constants/Food';
 
-const RandomButton = ({ category, img }) => {
+const RandomButton = ({ text, category, img }) => {
   const navigation = useNavigation();
   const [isSelected, setIsSelected] = useState(false);
 
@@ -42,7 +42,7 @@ const RandomButton = ({ category, img }) => {
       <View style={styles.imageContainer}>
         {img && <Image source={img} style={styles.image} />}
       </View>
-      <Text style={textStyle}>{category}</Text>
+      <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   );
 };

@@ -8,15 +8,15 @@ import cafe from '../../assets/cafe.png';
 import fast_food from '../../assets/fast_food.png';
 
 export const foodCategory = {
-  KOREAN: { name: 'KOREAN', img: korea },
-  JAPANESE: { name: 'JAPANESE', img: japan },
-  CHINESE: { name: 'CHINESE', img: china },
-  WESTERN_ASIAN: { name: '양식/아시안', img: asia },
-  ALL: { name: 'ALL', img: null },
-  CHICKEN: { name: '치킨', img: meat },
-  SNACKS: { name: '분식', img: dining },
-  CAFE: { name: '카페/디저트', img: cafe },
-  FASTFOOD: { name: '패스트푸드', img: fast_food },
+  KOREAN: { text: '한식', name: 'KOREAN', img: korea },
+  JAPANESE: { text: '일식', name: 'JAPANESE', img: japan },
+  CHINESE: { text: '중식', name: 'CHINESE', img: china },
+  WESTERN_ASIAN: { text: '아시안', name: 'ASIAN', img: asia },
+  ALL: { text: 'ALL', name: '', img: null },
+  CHICKEN: { text: '치킨', name: 'CHICKEN', img: meat },
+  SNACKS: { text: '분식', name: 'SCHOOL_FOOD', img: dining },
+  CAFE: { text: '카페/디저트', name: 'CAFE_DESSERT', img: cafe },
+  FASTFOOD: { text: '패스트푸드', name: 'FAST_FOOD', img: fast_food },
 };
 
 // ROOT,
