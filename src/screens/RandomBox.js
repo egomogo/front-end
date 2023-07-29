@@ -97,7 +97,7 @@ const RandomBox = ({ route, navigation }) => {
         {data.map((item, index) => (
           <View
             style={{
-              width: itemWidth + (index === 0 ? cardMargin : cardMargin),
+              width: itemWidth + cardMargin,
             }}
             key={index}
           >
