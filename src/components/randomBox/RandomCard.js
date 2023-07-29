@@ -43,19 +43,20 @@ const RandomCard = ({
           style={[
             styles.cardContainer,
             {
-              width: detail ? 350 : 300,
-              flex: detail ? 0.7 : 0,
+              width: detail ? 330 : 300,
+              flex: detail ? 0.9 : 0,
             },
           ]}
         >
-          <View style={[styles.row, styles.spaceBetween]}>
-            <Text style={styles.name}>{name}</Text>
-            <View style={styles.row}>
+          <View style={[styles.column, styles.spaceBetween]}>
+            <View style={styles.rowend}>
               <Text style={styles.distance}>{distance}m</Text>
               <LikeButton />
             </View>
+            <Text style={styles.name}>{name}</Text>
           </View>
           <Text style={styles.address}>{address}</Text>
+          {detail && <MenuView />}
           {detail ? <MapView /> : <MenuView />}
         </View>
       </Pressable>
@@ -85,6 +86,10 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  rowend: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   spaceBetween: {
     justifyContent: 'space-between',
