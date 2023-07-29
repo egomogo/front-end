@@ -8,7 +8,12 @@ const CategorySelect = () => {
       <View style={styles.homegridContainer}>
         {Object.values(foodCategory).map((item) => {
           return (
-            <RandomButton key={item.name} category={item.name} img={item.img} />
+            <RandomButton
+              key={item.name}
+              text={item.text}
+              category={item.name}
+              img={item.img}
+            />
           );
         })}
       </View>
