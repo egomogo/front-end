@@ -1,4 +1,4 @@
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Alert } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
@@ -17,13 +17,15 @@ const RandomBox = ({ route }) => {
   const [y, setY] = useRecoilState(yState);
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
+  const number = 0;
+  const size = 10;
   const MAX_NUM = 100000;
   const MIN_NUM = 1;
 
   const seed = Math.floor(Math.random() * (MAX_NUM - MIN_NUM) + MIN_NUM);
 
   useEffect(() => {
-    getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
+    getRandomRestaurant(seed, category, x, y, distanceLimit, number, size).then(
       (res) => {
         if (res.data.documents.length === 0) {
           Toast({
@@ -31,6 +33,7 @@ const RandomBox = ({ route }) => {
           });
         }
         setData(res.data.documents);
+        console.log(res.data.meta);
       }
     );
   }, []);
@@ -42,6 +45,10 @@ const RandomBox = ({ route }) => {
       <Swiper
         style={styles.swiper}
         showsButtons={true}
+        onIndexChanged={(index) => {
+          if (index === 0) Alert.alert('추천다시하실?');
+          console.log(index);
+        }}
         nextButton={<Text style={styles.swiperButtonText}>›</Text>}
         prevButton={<Text style={styles.swiperButtonText}>‹</Text>}
       >
