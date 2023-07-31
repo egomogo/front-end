@@ -42,7 +42,11 @@ const RandomBox = ({ route, navigation }) => {
             text: NULL_DATA,
           });
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 5c4b0cf30c59dcacfdd544de952ea37afaa33caf
         const updatedData = res.data.documents.map((item) => ({
           ...item,
           detail: false,

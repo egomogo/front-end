@@ -8,16 +8,17 @@ import { getCurrentPosition } from '../components/common/GeolocationAPI';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { minuteState, xState, yState } from '../atom';
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Home = () => {
+
+const Home = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
   const [x, setX] = useRecoilState(xState);
   const [y, setY] = useRecoilState(yState);
+  navigation.setOptions({ headerShown: false });
 
   return (
     <Container>
-      <HomeLogo />
+      <HomeLogo navigation={navigation} />
       <DistanceButton
         onPress={() => {
           getCurrentPosition(setX, setY);
