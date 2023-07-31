@@ -29,12 +29,6 @@ const RandomBox = ({ route, navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
-
-  useEffect(() => {
     getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
       (res) => {
         if (res.data.documents.length === 0) {
