@@ -66,10 +66,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   rowend: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
