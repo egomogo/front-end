@@ -1,6 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import LikeButton from '../common/LikeButton';
 import KakaoMap from '../common/KakaoMap';
+import MenuView from './MenuView';
 import { RandomCardColor } from '../../constants/Color';
 
 const RandomCard = ({
@@ -12,30 +13,6 @@ const RandomCard = ({
   detail,
   onPress,
 }) => {
-  const MenuView = () => {
-    return menus ? (
-      menus.map((item, index) => {
-        return (
-          <View key={index} style={styles.row}>
-            <Text style={styles.menu}>{item.name}</Text>
-            <Text style={styles.price}>
-              {item.price}
-              {!isNaN(item.price.replace(/,/g, '')) && '원'}
-            </Text>
-          </View>
-        );
-      })
-    ) : (
-      <View>
-        <Text style={styles.menu}>메뉴 정보 없음</Text>
-      </View>
-    );
-  };
-
-  const MapView = () => {
-    return <KakaoMap currentCoord={coords} />;
-  };
-
   return (
     <View style={styles.container}>
       <Pressable onPress={onPress}>
@@ -56,8 +33,14 @@ const RandomCard = ({
             <Text style={styles.name}>{name}</Text>
           </View>
           <Text style={styles.address}>{address}</Text>
-          {detail && <MenuView />}
-          {detail ? <MapView /> : <MenuView />}
+          {detail ? (
+            <>
+              <MenuView menus={menus} />
+              <KakaoMap currentCoord={coords} />
+            </>
+          ) : (
+            <MenuView menus={menus} />
+          )}
         </View>
       </Pressable>
     </View>
@@ -111,13 +94,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 40,
   },
-  menu: {
-    width: 160,
-    color: RandomCardColor.menu,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  price: { color: RandomCardColor.price, fontSize: 20, fontWeight: 'bold' },
 });
 
 export default RandomCard;
