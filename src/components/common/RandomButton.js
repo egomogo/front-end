@@ -8,7 +8,9 @@ import { foodCategory } from '../../constants/Food';
 const RandomButton = ({ text, category, img }) => {
   const navigation = useNavigation();
   const [isSelected, setIsSelected] = useState(false);
-
+  const MAX_NUM = 100000;
+  const MIN_NUM = 1;
+  const seed = Math.floor(Math.random() * (MAX_NUM - MIN_NUM) + MIN_NUM);
   const handlePressIn = () => {
     setIsSelected(true);
   };
@@ -18,7 +20,7 @@ const RandomButton = ({ text, category, img }) => {
   };
 
   const handlePress = () => {
-    navigation.navigate(NavContents.RandomBox.name, { category });
+    navigation.navigate(NavContents.RandomBox.name, { category, seed });
   };
 
   const buttonStyle = isSelected
