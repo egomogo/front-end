@@ -14,18 +14,16 @@ const itemWidth = viewportWidth / 1.3;
 const cardMargin = 25;
 
 const RandomBox = ({ route, navigation }) => {
-  const { category } = route.params;
+  const { category, seed } = route.params;
 
   const [x, setX] = useRecoilState(xState);
   const [y, setY] = useRecoilState(yState);
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
-  const number = 0;
-  const size = 10;
   const [details, setDetails] = useState([]);
-  const MAX_NUM = 100000;
-  const MIN_NUM = 1;
-  const seed = Math.floor(Math.random() * (MAX_NUM - MIN_NUM) + MIN_NUM);
+
+  const [number, setNumber] = useState(0);
+  const [size, setSize] = useState(10);
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,7 +46,7 @@ const RandomBox = ({ route, navigation }) => {
             text: NULL_DATA,
           });
         }
-        
+
         const updatedData = res.data.documents.map((item) => ({
           ...item,
           detail: false,
@@ -57,7 +55,7 @@ const RandomBox = ({ route, navigation }) => {
         setDetails(new Array(updatedData.length).fill(false));
       }
     );
-  }, []);
+  };
 
   useEffect(() => {
     const listener = scrollX.addListener(({ value }) => {
@@ -72,6 +70,21 @@ const RandomBox = ({ route, navigation }) => {
       scrollX.removeListener(listener);
     };
   }, [currentIndex, data.length]);
+
+  useEffect(() => {
+    console.log(seed);
+    if (currentIndex === 8) {
+      console.log('hi');
+      setNumber((number) => {
+        return number + 1;
+      });
+      setSize((size) => {
+        return size + 10;
+      });
+      console.log(number, size);
+      getRestaurant();
+    }
+  }, [currentIndex]);
 
   const toggleDetail = (index) => {
     const newDetails = [...details];
