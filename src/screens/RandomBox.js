@@ -5,7 +5,7 @@ import RandomCard from '../components/randomBox/RandomCard';
 import Toast from '../components/common/Toast';
 import { NULL_DATA } from '../constants/Error';
 import { getRandomRestaurant } from '../axios/Random';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { distanceLimitState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
 
@@ -16,8 +16,8 @@ const cardMargin = 25;
 const RandomBox = ({ route, navigation }) => {
   const { category, seed } = route.params;
 
-  const [x, setX] = useRecoilState(xState);
-  const [y, setY] = useRecoilState(yState);
+  const x = useRecoilValue(xState);
+  const y = useRecoilValue(yState);
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
   const [details, setDetails] = useState([]);
@@ -29,17 +29,7 @@ const RandomBox = ({ route, navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
-
-  useEffect(() => {
-    getRestaurant();
-  }, []);
-
-  const getRestaurant = () => {
-    getRandomRestaurant(seed, category, x, y, distanceLimit, number, size).then(
+    getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
       (res) => {
         if (res.data.documents.length === 0) {
           Toast({
@@ -55,7 +45,7 @@ const RandomBox = ({ route, navigation }) => {
         setDetails(new Array(updatedData.length).fill(false));
       }
     );
-  };
+  }, []);
 
   useEffect(() => {
     const listener = scrollX.addListener(({ value }) => {
