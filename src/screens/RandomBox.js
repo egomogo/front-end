@@ -5,7 +5,7 @@ import RandomCard from '../components/randomBox/RandomCard';
 import Toast from '../components/common/Toast';
 import { NULL_DATA } from '../constants/Error';
 import { getRandomRestaurant } from '../axios/Random';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { distanceLimitState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
 
@@ -16,8 +16,8 @@ const cardMargin = 25;
 const RandomBox = ({ route, navigation }) => {
   const { category } = route.params;
 
-  const [x, setX] = useRecoilState(xState);
-  const [y, setY] = useRecoilState(yState);
+  const x = useRecoilValue(xState);
+  const y = useRecoilValue(yState);
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
   const [details, setDetails] = useState([]);
@@ -29,12 +29,6 @@ const RandomBox = ({ route, navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
-
-  useEffect(() => {
     getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
       (res) => {
         if (res.data.documents.length === 0) {
@@ -42,7 +36,7 @@ const RandomBox = ({ route, navigation }) => {
             text: NULL_DATA,
           });
         }
-        
+
         const updatedData = res.data.documents.map((item) => ({
           ...item,
           detail: false,

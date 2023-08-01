@@ -107,17 +107,18 @@ const styles = StyleSheet.create({
   },
   address: {
     color: RandomCardColor.address,
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: 'bold',
-    marginBottom: 40,
+    marginBottom: 20,
   },
   menu: {
     width: 160,
     color: RandomCardColor.menu,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
-  price: { color: RandomCardColor.price, fontSize: 20, fontWeight: 'bold' },
+  price: { color: RandomCardColor.price, fontSize: 15, fontWeight: 'bold' },
 });
 
 export default RandomCard;

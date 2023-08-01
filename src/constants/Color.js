@@ -16,6 +16,7 @@ const Boulder = '#757373'; // inputbox-label
 const TransparentBlack = '#00000099';
 const Black = '#000000';
 
+
 export const BackGroundColor = White;
 
 export const SliderColor = {
@@ -54,4 +55,12 @@ export const RandomCardColor = {
 export const ToastColor = {
   background: TransparentBlack,
   color: White,
+};
+export const FilterColor = {
+  background: White,
+  color: Gallery,
+  border: DodgerBlue,
+  default: DodgerBlue,
+  disabled: PattensBlue,
+  text: Black
 };
