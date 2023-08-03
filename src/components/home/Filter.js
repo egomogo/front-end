@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
 
   modalContainer: {
-    flex: 0.9,
+    //flex: 0.9,
     marginTop: 'auto',
     backgroundColor: FilterColor.background,
     justifyContent: 'center',
