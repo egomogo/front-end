@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     borderColor: FilterColor.color,
     borderRadius: 30,
     padding: 10,
-    width: '47%',
     alignItems: 'center',
     margin: 5,
   },

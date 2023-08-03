@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+     ScrollView,
 } from 'react-native';
 import { FilterColor } from '../../constants/Color';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,6 +15,9 @@ import TextButton from '../common/TextButton';
 import FilterApplyButton from '../common/FilterApplyButton';
 import { foodCategory } from '../../constants/Food';
 import { useNavigation } from '@react-navigation/native';
+
+import { foodCategory1 } from '../../constants/Food';
+
 
 const Filter = ({ visible, onRequestClose, onApply }) => {
   const navigation = useNavigation();
@@ -54,18 +58,30 @@ const Filter = ({ visible, onRequestClose, onApply }) => {
         </TouchableOpacity>
         <Text style={styles.filterText}>카테고리 중복 선택</Text>
         <Text style={styles.filterSmallText}>* 최대 5까지 선택 가능</Text>
+
+ <ScrollView>
         <View style={styles.buttonsContainer}>
-          {Object.values(foodCategory)
-            .filter((category) => category.name !== '')
-            .map((category, index) => (
-              <FilterButton
-                key={index}
-                category={category.text}
-                isSelected={selected.includes(category.name)}
-                onPress={() => selectCategory(category.name)}
-              />
-            ))}
+          {foodCategory1.map((group, index) => (
+
+            <View key={index}>
+              <Text style={styles.categoryTitle} >{group.title}</Text>
+              <View style={styles.categoryStyle}>
+                  {group.categories
+                    .filter((category) => category.name !== '')
+                    .map((category, index) => (
+                      <FilterButton
+                        key={index}
+                        category={category.text}
+                        isSelected={selected.includes(category.name)}
+                        onPress={() => selectCategory(category.name)}
+                      />
+                    ))}
+                    </View>
+            </View>
+          ))}
         </View>
+    </ScrollView>
+
         <FilterApplyButton
           color={
             selected.length > 0 ? FilterColor.default : FilterColor.disabled
@@ -88,8 +104,9 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
+
   modalContainer: {
-    flex: 0.5,
+    flex: 0.9,
     marginTop: 'auto',
     backgroundColor: FilterColor.background,
     justifyContent: 'center',
@@ -119,6 +136,11 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 15,
   },
+  categoryStyle: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      marginBottom:20
+    },
 });
 
 export default Filter;
