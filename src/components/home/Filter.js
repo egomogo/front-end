@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-     ScrollView,
 } from 'react-native';
 import { FilterColor } from '../../constants/Color';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,30 +14,37 @@ import TextButton from '../common/TextButton';
 import FilterApplyButton from '../common/FilterApplyButton';
 import { foodCategory } from '../../constants/Food';
 import { useNavigation } from '@react-navigation/native';
-
 import { foodCategory1 } from '../../constants/Food';
-
 
 const Filter = ({ visible, onRequestClose, onApply }) => {
   const navigation = useNavigation();
-  const [selected, setSelected] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const selectCategory = (category) => {
-    if (selected.includes(category)) {
-      setSelected(selected.filter((item) => item !== category));
+    setSelectedCategory(category);
+    setSelectedItems([]);
+  };
+
+  const selectItem = (item) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems(
+        selectedItems.filter((selectedItem) => selectedItem !== item)
+      );
     } else {
-      if (selected.length < 5) {
-        setSelected([...selected, category]);
+      if (selectedItems.length < 5) {
+        setSelectedItems([...selectedItems, item]);
       }
     }
   };
 
   const applyFilter = () => {
-    onApply(selected);
-    setSelected([]);
+    onApply(selectedItems);
+    setSelectedItems([]);
+    setSelectedCategory(null);
     navigation.navigate('RandomBox', {
-      category: selected.map(
-        (categoryName) => foodCategory[categoryName.toUpperCase()].name
+      category: selectedItems.map(
+        (itemName) => foodCategory[selectedCategory].name
       ),
     });
     onRequestClose();
@@ -53,38 +59,48 @@ const Filter = ({ visible, onRequestClose, onApply }) => {
     >
       <View style={styles.modalBackground}></View>
       <View style={styles.modalContainer}>
-        <TouchableOpacity style={styles.closeButton} onPress={onRequestClose}>
-          <Icon name="close" size={30} color="#000" />
-        </TouchableOpacity>
+        <View style={styles.backCloseButton}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => setSelectedCategory(null)}
+          >
+            <Icon name="arrow-back" size={30} color="#000" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.closeButton} onPress={onRequestClose}>
+            <Icon name="close" size={30} color="#000" />
+          </TouchableOpacity>
+        </View>
+
         <Text style={styles.filterText}>카테고리 중복 선택</Text>
         <Text style={styles.filterSmallText}>* 최대 5까지 선택 가능</Text>
-
- <ScrollView>
         <View style={styles.buttonsContainer}>
-          {foodCategory1.map((group, index) => (
-
-            <View key={index}>
-              <Text style={styles.categoryTitle} >{group.title}</Text>
-              <View style={styles.categoryStyle}>
-                  {group.categories
-                    .filter((category) => category.name !== '')
-                    .map((category, index) => (
-                      <FilterButton
-                        key={index}
-                        category={category.text}
-                        isSelected={selected.includes(category.name)}
-                        onPress={() => selectCategory(category.name)}
-                      />
-                    ))}
-                    </View>
-            </View>
-          ))}
+          {!selectedCategory
+            ? Object.values(foodCategory)
+                .filter((category) => category.name !== '')
+                .map((category, index) => (
+                  <FilterButton
+                    key={index}
+                    category={category.text}
+                    isSelected={selectedCategory === category.name}
+                    onPress={() => selectCategory(category.name)}
+                  />
+                ))
+            : foodCategory1
+                .find((category) => category.title === selectedCategory)
+                .categories.map((item, index) => (
+                  <FilterButton
+                    key={index}
+                    category={item.text}
+                    isSelected={selectedItems.includes(item.name)}
+                    onPress={() => selectItem(item.name)}
+                  />
+                ))}
         </View>
-    </ScrollView>
-
         <FilterApplyButton
           color={
-            selected.length > 0 ? FilterColor.default : FilterColor.disabled
+            selectedItems.length > 0
+              ? FilterColor.default
+              : FilterColor.disabled
           }
           onPress={applyFilter}
         >
@@ -104,9 +120,7 @@ const styles = StyleSheet.create({
     right: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-
   modalContainer: {
-    flex: 0.9,
     marginTop: 'auto',
     backgroundColor: FilterColor.background,
     justifyContent: 'center',
@@ -115,8 +129,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
   },
-  closeButton: {
-    alignSelf: 'flex-end',
+  backCloseButton: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
   },
   buttonsContainer: {
     flexDirection: 'row',
@@ -136,11 +152,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 15,
   },
-  categoryStyle: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      marginBottom:20
-    },
 });
 
 export default Filter;

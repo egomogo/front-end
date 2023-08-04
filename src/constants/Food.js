@@ -19,7 +19,6 @@ export const foodCategory = {
   FASTFOOD: { text: '패스트푸드', name: 'FAST_FOOD', img: fast_food },
 };
 
-
 // ROOT,
 //     KOREAN, SEA_FOOD, MEAT, NODDLE, RAW_FISH, PORRIDGE, KOREAN_STEW,
 //     JAPANESE, TUNA_SASHIMI, SUSHI, PORK_CUTLET_UDON, RAMEN,
@@ -29,11 +28,9 @@ export const foodCategory = {
 //     SCHOOL_FOOD, WESTERN_FOOD, ITALY, PIZZA, BURGER, STEAK_RIB, MEXICAN, SALAD,
 //     OTHER;
 
-
 export const foodCategory1 = [
-
   {
-    title: "KOREAN",
+    title: 'KOREAN',
     categories: [
       { text: 'KOREAN', name: 'KOREAN' },
       { text: 'SEA_FOOD', name: 'SEA_FOOD' },
@@ -42,64 +39,64 @@ export const foodCategory1 = [
       { text: 'RAW_FISH', name: 'RAW_FISH' },
       { text: 'PORRIDGE', name: 'PORRIDGE' },
       { text: 'KOREAN_STEW', name: 'KOREAN_STEW' },
-    ]
+    ],
   },
   {
-    title: "JAPANESE",
+    title: 'JAPANESE',
     categories: [
       { text: 'JAPANESE', name: 'JAPANESE' },
       { text: 'TUNA_SASHIMI', name: 'TUNA_SASHIMI' },
       { text: 'SUSHI', name: 'SUSHI' },
       { text: 'PORK_CUTLET_UDON', name: 'PORK_CUTLET_UDON' },
       { text: 'RAMEN', name: 'RAMEN' },
-    ]
+    ],
   },
   {
-    title: "CHINESE",
+    title: 'CHINESE',
     categories: [
-      { text: 'INDOOR_STALLS', name: 'INDOOR_STALLS'},
-      { text: 'HOF_PUB', name: 'HOF_PUB'},
-      { text: 'WINE_BAR', name: 'WINE_BAR'},
-      { text: 'IZAKAYA', name: 'IZAKAYA'},
-      { text: 'COCKTAIL_BAR', name: 'COCKTAIL_BAR'},
-      { text: 'SHABU_SHABU', name: 'SHABU_SHABU'},
-      { text: 'DRIVERS', name: 'DRIVERS'},
-      ]
-    },
+      { text: 'INDOOR_STALLS', name: 'INDOOR_STALLS' },
+      { text: 'HOF_PUB', name: 'HOF_PUB' },
+      { text: 'WINE_BAR', name: 'WINE_BAR' },
+      { text: 'IZAKAYA', name: 'IZAKAYA' },
+      { text: 'COCKTAIL_BAR', name: 'COCKTAIL_BAR' },
+      { text: 'SHABU_SHABU', name: 'SHABU_SHABU' },
+      { text: 'DRIVERS', name: 'DRIVERS' },
+    ],
+  },
   {
-    title: "ASIAN",
+    title: 'ASIAN',
     categories: [
-    { text: 'SOUTH_EAST_ASIAN', name: 'SOUTH_EAST_ASIAN'},
-    { text: 'INDIAN', name: 'INDIAN'},
-     { text: 'CHINESE', name: 'CHINESE'},
-     { text: 'LAMB_SKEWERS', name: 'LAMB_SKEWERS'},
-     { text: 'LUNCH_BOX', name: 'LUNCH_BOX'},
-     { text: 'FAST_FOOD', name: 'FAST_FOOD'},
-      ]
-    },
+      { text: 'SOUTH_EAST_ASIAN', name: 'SOUTH_EAST_ASIAN' },
+      { text: 'INDIAN', name: 'INDIAN' },
+      { text: 'CHINESE', name: 'CHINESE' },
+      { text: 'LAMB_SKEWERS', name: 'LAMB_SKEWERS' },
+      { text: 'LUNCH_BOX', name: 'LUNCH_BOX' },
+      { text: 'FAST_FOOD', name: 'FAST_FOOD' },
+    ],
+  },
   {
-    title: "CAFE",
+    title: 'CAFE',
     categories: [
-   { text: 'CAFE_DESSERT', name: 'CAFE_DESSERT'},
-   { text: 'SANDWICH', name: 'SANDWICH'},
-   { text: 'BAKERY', name: 'BAKERY'},
-   { text: 'RICE_CAKE', name: 'RICE_CAKE'},
-   { text: 'ICE_CREAM', name: 'ICE_CREAM'},
-   { text: 'DONUT', name: 'DONUT'},
-   { text: 'TOAST', name: 'TOAST'},
-   { text: 'CHICKEN', name: 'CHICKEN'},
-      ]
-    },
-    {
-    title: "SCHOOL_FOOD",
+      { text: 'CAFE_DESSERT', name: 'CAFE_DESSERT' },
+      { text: 'SANDWICH', name: 'SANDWICH' },
+      { text: 'BAKERY', name: 'BAKERY' },
+      { text: 'RICE_CAKE', name: 'RICE_CAKE' },
+      { text: 'ICE_CREAM', name: 'ICE_CREAM' },
+      { text: 'DONUT', name: 'DONUT' },
+      { text: 'TOAST', name: 'TOAST' },
+      { text: 'CHICKEN', name: 'CHICKEN' },
+    ],
+  },
+  {
+    title: 'SCHOOL_FOOD',
     categories: [
- { text: 'WESTERN_FOOD', name: 'WESTERN_FOOD'},
-   { text: 'ITALY', name: 'ITALY'},
-   { text: 'PIZZA', name: 'PIZZA'},
-   { text: 'BURGER', name: 'BURGER'},
-   { text: 'STEAK_RIB', name: 'STEAK_RIB'},
-   { text: 'MEXICAN', name: 'MEXICAN'},
-   { text: 'SALAD', name: 'SALAD'},
-      ]
-    },
-  ];
+      { text: 'WESTERN_FOOD', name: 'WESTERN_FOOD' },
+      { text: 'ITALY', name: 'ITALY' },
+      { text: 'PIZZA', name: 'PIZZA' },
+      { text: 'BURGER', name: 'BURGER' },
+      { text: 'STEAK_RIB', name: 'STEAK_RIB' },
+      { text: 'MEXICAN', name: 'MEXICAN' },
+      { text: 'SALAD', name: 'SALAD' },
+    ],
+  },
+];
