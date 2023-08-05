@@ -4,7 +4,7 @@ import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import Toast from '../components/common/Toast';
 import { NULL_DATA } from '../constants/Error';
-import { getDetailRestaurant, getRandomRestaurant } from '../axios/Random';
+import { getDetailRestaurant, getRandomRestaurant } from '../axios/restaurant';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { distanceLimitState, kakaoShopIdState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
