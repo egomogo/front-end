@@ -4,7 +4,7 @@ import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import Toast from '../components/common/Toast';
 import { NULL_DATA } from '../constants/Error';
-import { getRandomRestaurant } from '../axios/Random';
+import { getRandomRestaurant } from '../axios/restaurant';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { distanceLimitState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
@@ -42,7 +42,7 @@ const RandomBox = ({ route, navigation }) => {
             text: NULL_DATA,
           });
         }
-        
+
         const updatedData = res.data.documents.map((item) => ({
           ...item,
           detail: false,

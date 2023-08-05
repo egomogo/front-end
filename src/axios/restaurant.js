@@ -1,4 +1,4 @@
-import { GET_RANDOM_RESTAURANT } from '../constants/api';
+import { GET_RANDOM_RESTAURANT } from '../constants/API';
 import request from './axios';
 
 export const getRandomRestaurant = async (

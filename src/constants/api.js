@@ -1,3 +1,4 @@
+// restaurant.js
 export const GET_RANDOM_RESTAURANT = (
   seed,
   category,
