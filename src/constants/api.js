@@ -1,3 +1,4 @@
+// restaurant.js
 export const GET_RANDOM_RESTAURANT = (
   seed,
   category,
@@ -12,4 +13,9 @@ export const GET_RANDOM_RESTAURANT = (
 
 export const GET_DETAIL_RESTAURANT = (restaurantId) => {
   return `/restaurants/${restaurantId}`;
+};
+
+// category.js
+export const GET_CATEGORY = () => {
+  return `/restaurants/categories`;
 };
