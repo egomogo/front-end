@@ -9,7 +9,6 @@ import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { minuteState, xState, yState } from '../atom';
 
-
 const Home = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
   const [x, setX] = useRecoilState(xState);
