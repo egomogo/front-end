@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { View, Animated, Dimensions } from 'react-native';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import Toast from '../components/common/Toast';
 import { NULL_DATA } from '../constants/Error';
-import { getRandomRestaurant } from '../axios/Random';
-import { useRecoilValue } from 'recoil';
-import { distanceLimitState, xState, yState } from '../atom';
+import { getDetailRestaurant, getRandomRestaurant } from '../axios/Random';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { distanceLimitState, kakaoShopIdState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
 
 const { width: viewportWidth } = Dimensions.get('window');
@@ -21,15 +21,15 @@ const RandomBox = ({ route, navigation }) => {
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
   const [details, setDetails] = useState([]);
-
-  const [number, setNumber] = useState(0);
-  const [size, setSize] = useState(10);
+  const [kakaoShopId, setkakaoShopId] = useRecoilState(kakaoShopIdState);
+  const page = 0;
+  const size = 10;
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
+    getRandomRestaurant(seed, category, x, y, distanceLimit, page, size).then(
       (res) => {
         if (res.data.documents.length === 0) {
           Toast({
@@ -60,21 +60,6 @@ const RandomBox = ({ route, navigation }) => {
       scrollX.removeListener(listener);
     };
   }, [currentIndex, data.length]);
-
-  useEffect(() => {
-    console.log(seed);
-    if (currentIndex === 8) {
-      console.log('hi');
-      setNumber((number) => {
-        return number + 1;
-      });
-      setSize((size) => {
-        return size + 10;
-      });
-      console.log(number, size);
-      getRestaurant();
-    }
-  }, [currentIndex]);
 
   const toggleDetail = (index) => {
     const newDetails = [...details];
@@ -117,7 +102,13 @@ const RandomBox = ({ route, navigation }) => {
               menus={item.menus}
               coords={item.coords}
               detail={details[index]}
-              onPress={() => toggleDetail(index)}
+              navigation={navigation}
+              onPress={() => {
+                toggleDetail(index);
+                getDetailRestaurant(item.id).then((res) => {
+                  setkakaoShopId(res.data.kakaoShopId);
+                });
+              }}
             />
           </View>
         ))}
