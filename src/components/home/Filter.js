@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Modal,
   Button,
@@ -15,15 +15,29 @@ import TextButton from '../common/TextButton';
 import FilterApplyButton from '../common/FilterApplyButton';
 import { foodCategory } from '../../constants/Food';
 import { useNavigation } from '@react-navigation/native';
-
 import { foodCategory1 } from '../../constants/Food';
 
+import { getCategory } from '../../axios/category';
 
 const Filter = ({ visible, onRequestClose, onApply }) => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState([]);
+const [categories, setCategories] = useState([]);
+const [relationships, setRelationships] = useState([]);
+
+useEffect(() => {
+  getCategory()
+    .then((res) => {
+      setCategories(res.data.nodes);
+      setRelationships(res.data.edges);
+      console.log(res.data)
+    })
+    .catch((e) => console.log(e.response));
+}, []);
+
 
   const selectCategory = (category) => {
+  console.log("selectCategory:", category);
     if (selected.includes(category)) {
       setSelected(selected.filter((item) => item !== category));
     } else {
@@ -38,7 +52,7 @@ const Filter = ({ visible, onRequestClose, onApply }) => {
     setSelected([]);
     navigation.navigate('RandomBox', {
       category: selected.map(
-        (categoryName) => foodCategory[categoryName.toUpperCase()].name
+        (categoryName) => foodCategory.name
       ),
     });
     onRequestClose();
@@ -59,29 +73,31 @@ const Filter = ({ visible, onRequestClose, onApply }) => {
         <Text style={styles.filterText}>카테고리 중복 선택</Text>
         <Text style={styles.filterSmallText}>* 최대 5까지 선택 가능</Text>
 
- <ScrollView>
-        <View style={styles.buttonsContainer}>
-          {foodCategory1.map((group, index) => (
+<ScrollView>
+  <View style={styles.buttonsContainer}>
+    {categories.map((category, index) => {
+      const children = relationships
+        .filter((relationship) => relationship[0] === index)
+        .map((relationship) => categories[relationship[1]]);
 
-            <View key={index}>
-              <Text style={styles.categoryTitle} >{group.title}</Text>
-              <View style={styles.categoryStyle}>
-                  {group.categories
-                    .filter((category) => category.name !== '')
-                    .map((category, index) => (
-                      <FilterButton
-                        key={index}
-                        category={category.text}
-                        isSelected={selected.includes(category.name)}
-                        onPress={() => selectCategory(category.name)}
-                      />
-                    ))}
-                    </View>
-            </View>
-          ))}
+      return (
+        <View key={index}>
+          {children.length > 0 && <Text style={styles.categoryTitle}>{category.name}</Text>}
+          <View style={styles.categoryStyle}>
+            {children.map((child, idx) => (
+              <FilterButton
+                key={idx}
+                category={child.name}
+                isSelected={selected.includes(child.code)}
+                onPress={() => selectCategory(child.code)}
+              />
+            ))}
+          </View>
         </View>
-    </ScrollView>
-
+      );
+    })}
+  </View>
+</ScrollView>
         <FilterApplyButton
           color={
             selected.length > 0 ? FilterColor.default : FilterColor.disabled
@@ -106,7 +122,7 @@ const styles = StyleSheet.create({
   },
 
   modalContainer: {
-    //flex: 0.9,
+    flex: 0.9,
     marginTop: 'auto',
     backgroundColor: FilterColor.background,
     justifyContent: 'center',
@@ -139,8 +155,12 @@ const styles = StyleSheet.create({
   categoryStyle: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      marginBottom:20
+      marginBottom:20,
     },
+categoryTitle:{
+    fontSize: 18,
+    //backgroundColor: FilterColor.text,
+}
 });
 
 export default Filter;
