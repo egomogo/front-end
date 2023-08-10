@@ -27,24 +27,29 @@ const RandomBox = ({ route, navigation }) => {
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [page, setPage] = useState(0);
 
-  useEffect(() => {
-    getRandomRestaurant(seed, category, x, y, distanceLimit, 0, 10).then(
+  const fetchRestaurants = (page) => {
+    console.log(`페이지 : ${page}`);
+    getRandomRestaurant(seed, category, x, y, distanceLimit, page, 10).then(
       (res) => {
         if (res.data.documents.length === 0) {
-          Toast({
-            text: NULL_DATA,
-          });
+          Toast({ text: NULL_DATA });
         }
-
         const updatedData = res.data.documents.map((item) => ({
           ...item,
           detail: false,
         }));
-        setData(updatedData);
-        setDetails(new Array(updatedData.length).fill(false));
+        console.log(`Fetched ${updatedData.length} items`);
+        console.log(updatedData);
+        setData(data.concat(updatedData));
+        setDetails(new Array(data.length + updatedData.length).fill(false));
       }
     );
+  };
+
+  useEffect(() => {
+    fetchRestaurants(page);
   }, []);
 
   useEffect(() => {
@@ -54,13 +59,17 @@ const RandomBox = ({ route, navigation }) => {
         setDetails(new Array(data.length).fill(false));
         setCurrentIndex(newIndex);
       }
+
+      if (newIndex === data.length - 1) {
+        setPage(page + 1);
+        fetchRestaurants(page + 1);
+      }
     });
 
     return () => {
       scrollX.removeListener(listener);
     };
-  }, [currentIndex, data.length]);
-
+  }, [currentIndex, data.length, page]);
   const toggleDetail = (index) => {
     const newDetails = [...details];
     newDetails[index] = !newDetails[index];

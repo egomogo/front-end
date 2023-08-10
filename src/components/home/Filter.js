@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Modal,
   Button,
@@ -6,38 +6,32 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-     ScrollView,
+  ScrollView,
 } from 'react-native';
 import { FilterColor } from '../../constants/Color';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FilterButton from '../common/FilterButton';
 import TextButton from '../common/TextButton';
 import FilterApplyButton from '../common/FilterApplyButton';
-import { foodCategory } from '../../constants/Food';
 import { useNavigation } from '@react-navigation/native';
-import { foodCategory1 } from '../../constants/Food';
-
 import { getCategory } from '../../axios/category';
 
 const Filter = ({ visible, onRequestClose, onApply }) => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState([]);
-const [categories, setCategories] = useState([]);
-const [relationships, setRelationships] = useState([]);
+  const [categories, setCategories] = useState({ nodes: [], edges: [] });
 
-useEffect(() => {
-  getCategory()
-    .then((res) => {
-      setCategories(res.data.nodes);
-      setRelationships(res.data.edges);
-      console.log(res.data)
-    })
-    .catch((e) => console.log(e.response));
-}, []);
+  const selectEdge = (edgeIndex) => {
+    const edge = categories.edges[edgeIndex];
+    const selectedNodes = edge.map((nodeIndex) => categories.nodes[nodeIndex]);
 
+    navigation.navigate('RandomBox', {
+      categories: selectedNodes.map((node) => node.name),
+    });
+    onRequestClose();
+  };
 
   const selectCategory = (category) => {
-  console.log("selectCategory:", category);
     if (selected.includes(category)) {
       setSelected(selected.filter((item) => item !== category));
     } else {
@@ -47,13 +41,20 @@ useEffect(() => {
     }
   };
 
+  useEffect(() => {
+    getCategory()
+      .then((res) => {
+        const { nodes, edges } = res.data;
+        setCategories({ nodes, edges });
+      })
+      .catch((e) => console.log(e.response));
+  }, []);
+
   const applyFilter = () => {
     onApply(selected);
     setSelected([]);
     navigation.navigate('RandomBox', {
-      category: selected.map(
-        (categoryName) => foodCategory.name
-      ),
+      category: selected,
     });
     onRequestClose();
   };
@@ -73,31 +74,28 @@ useEffect(() => {
         <Text style={styles.filterText}>카테고리 중복 선택</Text>
         <Text style={styles.filterSmallText}>* 최대 5까지 선택 가능</Text>
 
-<ScrollView>
-  <View style={styles.buttonsContainer}>
-    {categories.map((category, index) => {
-      const children = relationships
-        .filter((relationship) => relationship[0] === index)
-        .map((relationship) => categories[relationship[1]]);
-
-      return (
-        <View key={index}>
-          {children.length > 0 && <Text style={styles.categoryTitle}>{category.name}</Text>}
-          <View style={styles.categoryStyle}>
-            {children.map((child, idx) => (
-              <FilterButton
-                key={idx}
-                category={child.name}
-                isSelected={selected.includes(child.code)}
-                onPress={() => selectCategory(child.code)}
-              />
-            ))}
+        <ScrollView>
+          <View style={styles.buttonsContainer}>
+            {categories.nodes.map((node, index) => {
+              if (categories.edges.some((edge) => edge[0] === index)) {
+                return (
+                  <Text style={styles.categoryTitle} key={index}>
+                    {node.name}{' '}
+                  </Text>
+                );
+              }
+              return (
+                <FilterButton
+                  key={index}
+                  category={node.name}
+                  isSelected={selected.includes(node.code)}
+                  onPress={() => selectCategory(node.code)}
+                />
+              );
+            })}
           </View>
-        </View>
-      );
-    })}
-  </View>
-</ScrollView>
+        </ScrollView>
+
         <FilterApplyButton
           color={
             selected.length > 0 ? FilterColor.default : FilterColor.disabled
@@ -153,14 +151,16 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   categoryStyle: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      marginBottom:20,
-    },
-categoryTitle:{
-    fontSize: 18,
-    //backgroundColor: FilterColor.text,
-}
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 20,
+  },
+  categoryTitle: {
+    fontSize: 17,
+    marginTop: 20,
+    width: '100%',
+    color: FilterColor.text,
+  },
 });
 
 export default Filter;
