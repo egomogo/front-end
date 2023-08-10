@@ -30,7 +30,7 @@ const RandomBox = ({ route, navigation }) => {
   const [page, setPage] = useState(0);
 
   const fetchRestaurants = (page) => {
-    console.log(`페이지 : ${page}`);
+   
     getRandomRestaurant(seed, category, x, y, distanceLimit, page, 10).then(
       (res) => {
         if (res.data.documents.length === 0) {
@@ -40,8 +40,7 @@ const RandomBox = ({ route, navigation }) => {
           ...item,
           detail: false,
         }));
-        console.log(`Fetched ${updatedData.length} items`);
-        console.log(updatedData);
+        
         setData(data.concat(updatedData));
         setDetails(new Array(data.length + updatedData.length).fill(false));
       }
