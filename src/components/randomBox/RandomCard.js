@@ -34,10 +34,7 @@ const RandomCard = ({
           </View>
           <Text style={styles.address}>{address}</Text>
           {detail ? (
-            <>
-              <MenuView menus={menus} />
-              <KakaoMap currentCoord={coords} />
-            </>
+            <KakaoMap currentCoord={coords} />
           ) : (
             <MenuView menus={menus} />
           )}
