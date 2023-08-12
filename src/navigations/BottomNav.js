@@ -1,9 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AI from '../screens/AI';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import dice from '../../assets/dice.png';
+import robot from '../../assets/robot.png';
+import filter from '../../assets/filter.png';
 import { RandomStack } from './StackNav';
 import Filter from '../components/home/Filter';
+import { Image, StyleSheet } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +39,9 @@ const BottomNav = () => {
           component={RandomStack}
           options={{
             tabBarLabel: 'Home',
-            tabBarIcon: () => <FontAwesome5 name="dice" size={24} />,
+            tabBarIcon: () => {
+              return <Image source={dice} style={styles.image} />;
+            },
           }}
         />
 
@@ -45,7 +50,9 @@ const BottomNav = () => {
           component={AI}
           options={{
             tabBarLabel: 'AI',
-            tabBarIcon: () => <FontAwesome5 name="robot" size={24} />,
+            tabBarIcon: () => {
+              return <Image source={robot} style={styles.image} />;
+            },
           }}
         />
 
@@ -60,7 +67,9 @@ const BottomNav = () => {
           }}
           options={{
             tabBarLabel: 'Filter',
-            tabBarIcon: () => <FontAwesome5 name="robot" size={24} />,
+            tabBarIcon: () => {
+              return <Image source={filter} style={styles.image} />;
+            },
           }}
         />
       </Tab.Navigator>
@@ -72,5 +81,9 @@ const BottomNav = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  image: { width: 42, height: 42 },
+});
 
 export default BottomNav;
