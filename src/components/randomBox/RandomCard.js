@@ -41,7 +41,7 @@ const RandomCard = ({
               <MoreBtn navigation={navigation} />
             </>
           ) : (
-            <MenuView menus={menus} />
+            <MenuView menus={menus}  />
           )}
         </View>
       </Pressable>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   name: {
     color: RandomCardColor.name,
-    fontSize: 28,
+    fontSize: 27,
     fontWeight: 'bold',
   },
   distance: {
@@ -92,14 +92,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  menu: {
-    width: 160,
-    color: RandomCardColor.menu,
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  price: { color: RandomCardColor.price, fontSize: 15, fontWeight: 'bold' },
 });
 
 export default RandomCard;

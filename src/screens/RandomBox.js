@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Animated, Dimensions } from 'react-native';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import Toast from '../components/common/Toast';
 import { NULL_DATA } from '../constants/Error';
-import { getDetailRestaurant, getRandomRestaurant } from '../axios/restaurant';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { distanceLimitState, kakaoShopIdState, xState, yState } from '../atom';
+import { getRandomRestaurant } from '../axios/restaurant';
+import { useRecoilValue } from 'recoil';
+import { distanceLimitState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
 
 const { width: viewportWidth } = Dimensions.get('window');
@@ -14,37 +14,41 @@ const itemWidth = viewportWidth / 1.3;
 const cardMargin = 25;
 
 const RandomBox = ({ route, navigation }) => {
-  const { category, seed } = route.params;
+  const { category } = route.params;
 
   const x = useRecoilValue(xState);
   const y = useRecoilValue(yState);
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
   const [details, setDetails] = useState([]);
-  const [kakaoShopId, setkakaoShopId] = useRecoilState(kakaoShopIdState);
-  const page = 0;
-  const size = 10;
+  const MAX_NUM = 100000;
+  const MIN_NUM = 1;
+  const seed = Math.floor(Math.random() * (MAX_NUM - MIN_NUM) + MIN_NUM);
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [page, setPage] = useState(0);
 
-  useEffect(() => {
-    getRandomRestaurant(seed, category, x, y, distanceLimit, page, size).then(
+  const fetchRestaurants = (page) => {
+
+    getRandomRestaurant(seed, category, x, y, distanceLimit, page, 10).then(
       (res) => {
         if (res.data.documents.length === 0) {
-          Toast({
-            text: NULL_DATA,
-          });
+          Toast({ text: NULL_DATA });
         }
-
         const updatedData = res.data.documents.map((item) => ({
           ...item,
           detail: false,
         }));
-        setData(updatedData);
-        setDetails(new Array(updatedData.length).fill(false));
+
+        setData(data.concat(updatedData));
+        setDetails(new Array(data.length + updatedData.length).fill(false));
       }
     );
+  };
+
+  useEffect(() => {
+    fetchRestaurants(page);
   }, []);
 
   useEffect(() => {
@@ -54,13 +58,17 @@ const RandomBox = ({ route, navigation }) => {
         setDetails(new Array(data.length).fill(false));
         setCurrentIndex(newIndex);
       }
+
+      if (newIndex === data.length - 1) {
+        setPage(page + 1);
+        fetchRestaurants(page + 1);
+      }
     });
 
     return () => {
       scrollX.removeListener(listener);
     };
-  }, [currentIndex, data.length]);
-
+  }, [currentIndex, data.length, page]);
   const toggleDetail = (index) => {
     const newDetails = [...details];
     newDetails[index] = !newDetails[index];
@@ -102,13 +110,7 @@ const RandomBox = ({ route, navigation }) => {
               menus={item.menus}
               coords={item.coords}
               detail={details[index]}
-              navigation={navigation}
-              onPress={() => {
-                toggleDetail(index);
-                getDetailRestaurant(item.id).then((res) => {
-                  setkakaoShopId(res.data.kakaoShopId);
-                });
-              }}
+              onPress={() => toggleDetail(index)}
             />
           </View>
         ))}

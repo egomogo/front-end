@@ -23,12 +23,16 @@ const MenuView = ({ menus }) => {
 
 const styles = StyleSheet.create({
   menu: {
-    width: 160,
     color: RandomCardColor.menu,
     fontSize: 20,
     fontWeight: 'bold',
   },
-  price: { color: RandomCardColor.price, fontSize: 20, fontWeight: 'bold' },
+  price: { color: RandomCardColor.price, fontSize: 16, fontWeight: 'bold' },
+  row:{
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  }
 });
 
 export default MenuView;
