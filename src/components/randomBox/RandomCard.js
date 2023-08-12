@@ -37,7 +37,6 @@ const RandomCard = ({
           <Text style={styles.address}>{address}</Text>
           {detail ? (
             <>
-              <MenuView menus={menus} />
               <KakaoMap currentCoord={coords} />
               <MoreBtn navigation={navigation} />
             </>
