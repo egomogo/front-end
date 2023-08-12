@@ -1,13 +1,14 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Pressable, Image } from 'react-native';
+import moreBtn from '../../../assets/moreBtn.png';
 
 const MoreBtn = ({ navigation }) => {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Pressable
-        style={{ padding: 10, backgroundColor: 'black' }}
+        style={{ padding: 10 }}
         onPress={() => navigation.navigate('MoreView')}
       >
-        <Text>더보기</Text>
+        <Image source={moreBtn} />
       </Pressable>
     </View>
   );
