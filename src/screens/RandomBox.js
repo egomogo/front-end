@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { View, Animated, Dimensions } from 'react-native';
 import Container from '../components/common/Container';
 import RandomCard from '../components/randomBox/RandomCard';
 import Toast from '../components/common/Toast';
 import { NULL_DATA } from '../constants/Error';
-import { getRandomRestaurant } from '../axios/restaurant';
-import { useRecoilValue } from 'recoil';
-import { distanceLimitState, xState, yState } from '../atom';
+import { getDetailRestaurant, getRandomRestaurant } from '../axios/restaurant';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { distanceLimitState, kakaoShopIdState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
 
 const { width: viewportWidth } = Dimensions.get('window');
@@ -14,19 +14,19 @@ const itemWidth = viewportWidth / 1.3;
 const cardMargin = 25;
 
 const RandomBox = ({ route, navigation }) => {
-  const { category } = route.params;
+  const { category, seed } = route.params;
 
   const x = useRecoilValue(xState);
   const y = useRecoilValue(yState);
   const distanceLimit = useRecoilValue(distanceLimitState);
   const [data, setData] = useState([]);
   const [details, setDetails] = useState([]);
-  const MAX_NUM = 100000;
-  const MIN_NUM = 1;
-  const seed = Math.floor(Math.random() * (MAX_NUM - MIN_NUM) + MIN_NUM);
+  const [kakaoShopId, setkakaoShopId] = useRecoilState(kakaoShopIdState);
+
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const [page, setPage] = useState(0);
 
   const fetchRestaurants = (page) => {
@@ -110,7 +110,13 @@ const RandomBox = ({ route, navigation }) => {
               menus={item.menus}
               coords={item.coords}
               detail={details[index]}
-              onPress={() => toggleDetail(index)}
+              navigation={navigation}
+              onPress={() => {
+                toggleDetail(index);
+                getDetailRestaurant(item.id).then((res) => {
+                  setkakaoShopId(res.data.kakaoShopId);
+                });
+              }}
             />
           </View>
         ))}

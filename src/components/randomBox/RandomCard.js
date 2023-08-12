@@ -3,6 +3,7 @@ import LikeButton from '../common/LikeButton';
 import KakaoMap from '../common/KakaoMap';
 import MenuView from './MenuView';
 import { RandomCardColor } from '../../constants/Color';
+import MoreBtn from './MoreBtn';
 
 const RandomCard = ({
   name,
@@ -12,6 +13,7 @@ const RandomCard = ({
   coords,
   detail,
   onPress,
+  navigation,
 }) => {
   return (
     <View style={styles.container}>
@@ -35,8 +37,8 @@ const RandomCard = ({
           <Text style={styles.address}>{address}</Text>
           {detail ? (
             <>
-              <MenuView menus={menus} />
               <KakaoMap currentCoord={coords} />
+              <MoreBtn navigation={navigation} />
             </>
           ) : (
             <MenuView menus={menus} />

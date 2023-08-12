@@ -22,3 +22,8 @@ export const distanceLimitState = selector({
     return minute * 67;
   },
 });
+
+export const kakaoShopIdState = atom({
+  key: 'kakaoShopIdState',
+  default: '',
+});
