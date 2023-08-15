@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AI from '../screens/AI';
 import dice from '../../assets/dice.png';
-import robot from '../../assets/robot.png';
 import filter from '../../assets/filter.png';
 import { RandomStack } from './StackNav';
 import Filter from '../components/home/Filter';
@@ -41,17 +39,6 @@ const BottomNav = () => {
             tabBarLabel: 'Home',
             tabBarIcon: () => {
               return <Image source={dice} style={styles.image} />;
-            },
-          }}
-        />
-
-        <Tab.Screen
-          name="AI"
-          component={AI}
-          options={{
-            tabBarLabel: 'AI',
-            tabBarIcon: () => {
-              return <Image source={robot} style={styles.image} />;
             },
           }}
         />
