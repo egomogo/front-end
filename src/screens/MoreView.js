@@ -37,8 +37,8 @@ const MoreView = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { width: 100, flexDirection: 'row' },
-  image: { width: 27, height: 27, bottom: 3 },
+  container: { width: 100, flexDirection: 'row', bottom: 5 },
+  image: { width: 20, height: 20, left: 5 },
   text: { color: TextColor.dark },
 });
 
