@@ -1,16 +1,18 @@
 import { useState, useCallback } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import dice from '../../assets/dice.png';
+import homebtn from '../../assets/homebtn.jpg';
 import filter from '../../assets/filter.png';
 import { RandomStack } from './StackNav';
 import Filter from '../components/home/Filter';
 import { Image, StyleSheet } from 'react-native';
+import logo from '../../assets/logo.jpg';
+import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 const BottomNav = () => {
   const [isFilterModalVisible, setFilterModalVisible] = useState(false);
-
+const navigation = useNavigation();
   const handleFilterButton = useCallback(() => {
     setFilterModalVisible(true);
   }, []);
@@ -36,12 +38,22 @@ const BottomNav = () => {
           name="home"
           component={RandomStack}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: ' ',
             tabBarIcon: () => {
-              return <Image source={dice} style={styles.image} />;
+              return <Image source={homebtn} style={styles.homeimage} />;
             },
           }}
         />
+        <Tab.Screen
+                  name="wish"
+                  component={RandomStack}
+                  listeners={{
+                    tabPress: (event) => {
+                      event.preventDefault();
+                      navigation.navigate('WishList'); // WishList로 이동합니다.
+                    },
+                  }}
+                />
 
         <Tab.Screen
           name="Filter"
@@ -71,6 +83,7 @@ const BottomNav = () => {
 
 const styles = StyleSheet.create({
   image: { width: 42, height: 42 },
+  homeimage:{ width: 42, height: 42, marginTop:10 },
 });
 
 export default BottomNav;

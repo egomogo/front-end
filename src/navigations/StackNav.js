@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home';
 import RandomBox from '../screens/RandomBox';
 import MoreView from '../screens/MoreView';
+import WishList from '../screens/WishList';
 import { useLayoutEffect } from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
@@ -22,6 +23,7 @@ const RandomStack = ({ navigation, route }) => {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="RandomBox" component={RandomBox} />
       <Stack.Screen name="MoreView" component={MoreView} />
+      <Stack.Screen name="WishList" component={WishList} />
     </Stack.Navigator>
   );
 };

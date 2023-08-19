@@ -1,11 +1,10 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import LikeButton from '../common/LikeButton';
 import KakaoMap from '../common/KakaoMap';
-import MenuView from './MenuView';
 import { RandomCardColor } from '../../constants/Color';
-import MoreBtn from './MoreBtn';
 
-const RandomCard = ({
+
+const WishListBox = ({
   name,
   distance,
   address,
@@ -25,7 +24,6 @@ const RandomCard = ({
             styles.cardContainer,
             {
               width: detail ? 330 : 300,
-              flex: detail ? 0.9 : 0,
             },
           ]}
         >
@@ -38,14 +36,7 @@ const RandomCard = ({
             <Text style={styles.name}>{name}</Text>
           </View>
           <Text style={styles.address}>{address}</Text>
-          {detail ? (
-            <>
-              <KakaoMap currentCoord={coords} />
-              <MoreBtn navigation={navigation} />
-            </>
-          ) : (
-            <MenuView menus={menus}  />
-          )}
+          }
         </View>
       </Pressable>
     </View>
@@ -97,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RandomCard;
+export default WishListBox;

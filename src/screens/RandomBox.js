@@ -111,6 +111,7 @@ const RandomBox = ({ route, navigation }) => {
               coords={item.coords}
               detail={details[index]}
               navigation={navigation}
+              restaurantId={item.id}
               onPress={() => {
                 toggleDetail(index);
                 getDetailRestaurant(item.id).then((res) => {
