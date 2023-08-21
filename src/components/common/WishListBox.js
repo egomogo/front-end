@@ -2,57 +2,51 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import LikeButton from '../common/LikeButton';
 import KakaoMap from '../common/KakaoMap';
 import { RandomCardColor } from '../../constants/Color';
-
+import MoreBtn from '../../components/randomBox/MoreBtn';
+import { BackGroundColor } from '../../constants/Color';
 
 const WishListBox = ({
   name,
   distance,
   address,
   menus,
-  coords,
-  detail,
-  onPress,
   navigation,
-   restaurantId,
-}) => {
- console.log('RandomCard restaurantId:', restaurantId);
-  return (
-    <View style={styles.container}>
-      <Pressable onPress={onPress}>
-        <View
-          style={[
-            styles.cardContainer,
-            {
-              width: detail ? 330 : 300,
-            },
-          ]}
-        >
-          <View style={[styles.column, styles.spaceBetween]}>
-            <View style={styles.rowend}>
-              <Text style={styles.distance}>{distance}m</Text>
-            <LikeButton restaurantId={restaurantId} />
+  restaurantId,
+  liked,
+  onLikeChanged,
+  categories,
 
-            </View>
-            <Text style={styles.name}>{name}</Text>
-          </View>
-          <Text style={styles.address}>{address}</Text>
-          }
+}) => {
+  return (
+
+    <View style={styles.container}>
+      <View style={[styles.cardContainer]}>
+        <View style={[styles.rowend, styles.spaceBetween]}>
+                  <Text style={styles.name}>{name}</Text>
+            <LikeButton restaurantId={restaurantId} liked={liked} onLikeChanged={onLikeChanged} />
         </View>
-      </Pressable>
+        <Text style={styles.address}>{address}</Text>
+        <MoreBtn navigation={navigation} />
+      </View>
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 10,
+    marginTop: 10,
   },
   cardContainer: {
     backgroundColor: RandomCardColor.background,
     borderRadius: 30,
     padding: 30,
+    width:'88%',
     shadowColor: RandomCardColor.shadow,
     shadowOffset: {
       width: 0,
@@ -71,7 +65,7 @@ const styles = StyleSheet.create({
   },
   name: {
     color: RandomCardColor.name,
-    fontSize: 27,
+    fontSize: 23,
     fontWeight: 'bold',
   },
   distance: {
@@ -86,6 +80,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+
 });
 
 export default WishListBox;

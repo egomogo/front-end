@@ -9,6 +9,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { distanceLimitState, kakaoShopIdState, xState, yState } from '../atom';
 import HomeLogo from '../components/home/HomeLogo';
 
+
 const { width: viewportWidth } = Dimensions.get('window');
 const itemWidth = viewportWidth / 1.3;
 const cardMargin = 25;
@@ -112,6 +113,7 @@ const RandomBox = ({ route, navigation }) => {
               detail={details[index]}
               navigation={navigation}
               restaurantId={item.id}
+              onLikeChanged={() => {}}
               onPress={() => {
                 toggleDetail(index);
                 getDetailRestaurant(item.id).then((res) => {

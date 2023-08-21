@@ -1,31 +1,27 @@
+import React, { useState, useEffect } from 'react';
 import { Text, Pressable, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState, useEffect } from 'react';
 
-const LikeButton = ({ restaurantId }) => {
-  const [like, setLike] = useState(false);
+const LikeButton = ({ restaurantId, liked, onLikeChanged }) => {
+  const [like, setLike] = useState(liked);
 
-const handleLikeButton = async () => {
-  const liked = !like;
-  console.log('Current like status:', liked);
-  console.log('Current restaurantId:', restaurantId);
+  const handleLikeButton = async () => {
+    const likedStatus = !like;
+    setLike(likedStatus);
 
-  setLike(liked);
+    let likedIds = await AsyncStorage.getItem('likedIds');
+    likedIds = likedIds ? likedIds.split(',') : [];
 
-  let likedIds = await AsyncStorage.getItem('likedIds');
-  likedIds = likedIds ? likedIds.split(',') : [];
-  console.log('Current likedIds before operation:', likedIds);
+    if (likedStatus) {
+      likedIds.push(restaurantId);
+    } else {
+      likedIds = likedIds.filter(id => id !== restaurantId);
+    }
 
-  if (liked) {
-    likedIds.push(restaurantId);
-  } else {
-    likedIds = likedIds.filter(id => id !== restaurantId);
-  }
+    await AsyncStorage.setItem('likedIds', likedIds.join(','));
 
-  console.log('Saving likedIds:', likedIds.join(','));
-  await AsyncStorage.setItem('likedIds', likedIds.join(','));
-};
-
+    onLikeChanged(likedStatus, restaurantId);
+  };
 
   return (
     <Pressable
