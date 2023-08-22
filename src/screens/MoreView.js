@@ -1,11 +1,10 @@
-import { Image, View, StyleSheet, Text } from 'react-native';
+import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useRecoilValue } from 'recoil';
 import { kakaoShopIdState } from '../atom';
 import WebView from 'react-native-webview';
 import { useEffect } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import leftBack from '../../assets/leftBack.png';
-import { SliderColor, TextColor } from '../constants/Color';
+import { TextColor } from '../constants/Color';
 
 const MoreView = ({ navigation }) => {
   const kakaoShopId = useRecoilValue(kakaoShopIdState);
