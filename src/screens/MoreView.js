@@ -1,4 +1,4 @@
-import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useRecoilValue } from 'recoil';
 import { kakaoShopIdState } from '../atom';
 import WebView from 'react-native-webview';
