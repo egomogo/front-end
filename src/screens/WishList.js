@@ -6,10 +6,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import WishListBox from '../components/common/WishListBox';
 import { BackGroundColor } from '../constants/Color';
 import HomeLogo from '../components/home/HomeLogo';
+import { kakaoShopIdState } from '../atom';
+import { useRecoilState } from 'recoil';
 
 const WishList = ({ navigation }) => {
   const [wishList, setWishList] = useState([]);
   const [likedIds, setLikedIds] = useState([]);
+  const [kakaoShopId, setkakaoShopId] = useRecoilState(kakaoShopIdState);
 
   useEffect(() => {
     const getWishList = async () => {
@@ -20,6 +23,7 @@ const WishList = ({ navigation }) => {
 
       const response = await fetchWishList(ids);
       setWishList(response);
+      setkakaoShopId(response[0].kakaoShopId);
     };
 
     getWishList();
@@ -43,6 +47,7 @@ const WishList = ({ navigation }) => {
       coords={item.coords}
       liked={likedIds.includes(item.id)}
       onLikeChanged={onLikeChanged}
+      kakaoShopId={item.kakaoShopId}
       navigation={navigation}
     />
   );
