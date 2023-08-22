@@ -8,7 +8,6 @@ export const fetchWishList = async (ids) => {
     const response = await request.get(url);
 
     if (response.status !== 200) {
-      console.error("Response Status Code: ", response.status);
       throw new Error('Failed to fetch the wishlist');
     }
 
