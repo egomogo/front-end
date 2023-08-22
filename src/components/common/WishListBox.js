@@ -15,6 +15,7 @@ const WishListBox = ({
   liked,
   onLikeChanged,
   categories,
+  kakaoShopId,
 }) => {
   return (
     <View style={styles.container}>
@@ -28,7 +29,7 @@ const WishListBox = ({
           />
         </View>
         <Text style={styles.address}>{address}</Text>
-        <MoreBtn navigation={navigation} />
+        <MoreBtn navigation={navigation} kakaoShopId={kakaoShopId} />
       </View>
     </View>
   );
