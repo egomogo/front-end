@@ -14,7 +14,6 @@ export const fetchWishList = async (ids) => {
 
     return response.data.restaurants.map(item => item);
   } catch (error) {
-    console.error("API Error: ", error);
     return [];
   }
 };
