@@ -17,7 +17,6 @@ const RandomCard = ({
   restaurantId,
   onLikeChanged,
 }) => {
-  console.log('RandomCard restaurantId:', restaurantId);
   const formattedName = name.split(' ').join('\n');
   return (
     <View style={styles.container}>
