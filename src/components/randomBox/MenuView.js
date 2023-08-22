@@ -2,21 +2,23 @@ import { View, Text, StyleSheet } from 'react-native';
 import { RandomCardColor } from '../../constants/Color';
 
 const MenuView = ({ menus }) => {
-const hasLongName = menus ? menus.some((item) => item.name.length > 14) : false;
+  const hasLongName = menus
+    ? menus.some((item) => item.name.length > 14)
+    : false;
   const fontSize = hasLongName ? 14 : 18;
   return menus ? (
     menus.map((item, index) => {
       return (
         <View key={index} style={styles.row}>
-            <View style={styles.nameViewContainer}>
-                <Text style={{ ...styles.menu, fontSize }}>{item.name}</Text>
-            </View>
-            <View style={styles.menuViewContainer}>
-                <Text style={styles.price}>
-                    {item.price}
-                    {!isNaN(item.price.replace(/,/g, '')) && '원'}
-                </Text>
-            </View>
+          <View style={styles.nameViewContainer}>
+            <Text style={{ ...styles.menu, fontSize }}>{item.name}</Text>
+          </View>
+          <View style={styles.menuViewContainer}>
+            <Text style={styles.price}>
+              {item.price}
+              {!isNaN(item.price.replace(/,/g, '')) && '원'}
+            </Text>
+          </View>
         </View>
       );
     })
@@ -27,7 +29,6 @@ const hasLongName = menus ? menus.some((item) => item.name.length > 14) : false;
   );
 };
 
-
 const styles = StyleSheet.create({
   menu: {
     color: RandomCardColor.menu,
@@ -35,19 +36,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   price: { color: RandomCardColor.price, fontSize: 14, fontWeight: 'bold' },
-  row:{
+  row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
-  nameViewContainer:{
-       flex:3,
+  nameViewContainer: {
+    flex: 3,
   },
-    menuViewContainer:{
-    flex:2,
-     flexDirection: 'row',
-      justifyContent: 'flex-end',
-    },
+  menuViewContainer: {
+    flex: 2,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
 });
 
 export default MenuView;

@@ -15,15 +15,17 @@ const WishListBox = ({
   liked,
   onLikeChanged,
   categories,
-
 }) => {
   return (
-
     <View style={styles.container}>
       <View style={[styles.cardContainer]}>
         <View style={[styles.rowend, styles.spaceBetween]}>
-                  <Text style={styles.name}>{name}</Text>
-            <LikeButton restaurantId={restaurantId} liked={liked} onLikeChanged={onLikeChanged} />
+          <Text style={styles.name}>{name}</Text>
+          <LikeButton
+            restaurantId={restaurantId}
+            liked={liked}
+            onLikeChanged={onLikeChanged}
+          />
         </View>
         <Text style={styles.address}>{address}</Text>
         <MoreBtn navigation={navigation} />
@@ -31,8 +33,6 @@ const WishListBox = ({
     </View>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: RandomCardColor.background,
     borderRadius: 30,
     padding: 30,
-    width:'88%',
+    width: '88%',
     shadowColor: RandomCardColor.shadow,
     shadowOffset: {
       width: 0,
@@ -66,21 +66,17 @@ const styles = StyleSheet.create({
   name: {
     color: RandomCardColor.name,
     fontSize: 23,
-    fontWeight: 'bold',
   },
   distance: {
     color: RandomCardColor.distance,
     fontSize: 15,
-    fontWeight: 'bold',
     marginRight: 10,
   },
   address: {
     color: RandomCardColor.address,
     fontSize: 14,
-    fontWeight: 'bold',
     marginBottom: 20,
   },
-
 });
 
 export default WishListBox;
