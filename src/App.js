@@ -3,6 +3,7 @@ import { RecoilRoot } from 'recoil';
 import Toast from 'react-native-toast-message';
 import { toastConfig } from './components/common/Toast';
 import BottomNav from './navigations/BottomNav';
+import * as Font from 'expo-font';
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
         </NavigationContainer>
       </RecoilRoot>
       <Toast config={toastConfig} />
-  </>
+    </>
   );
 };
 

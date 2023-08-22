@@ -14,7 +14,10 @@ const RandomCard = ({
   detail,
   onPress,
   navigation,
+  restaurantId,
+  onLikeChanged,
 }) => {
+  const formattedName = name.split(' ').join('\n');
   return (
     <View style={styles.container}>
       <Pressable onPress={onPress}>
@@ -28,11 +31,19 @@ const RandomCard = ({
           ]}
         >
           <View style={[styles.column, styles.spaceBetween]}>
-            <View style={styles.rowend}>
-              <Text style={styles.distance}>{distance}m</Text>
-              <LikeButton />
+            <View style={styles.rowstart}>
+              <View style={styles.nameContainer}>
+                <Text style={styles.name}>{formattedName}</Text>
+              </View>
+
+              <View style={styles.distanceLikeButtonContainer}>
+                <Text style={styles.distance}>{distance}m</Text>
+                <LikeButton
+                  restaurantId={restaurantId}
+                  onLikeChanged={onLikeChanged}
+                />
+              </View>
             </View>
-            <Text style={styles.name}>{name}</Text>
           </View>
           <Text style={styles.address}>{address}</Text>
           {detail ? (
@@ -41,7 +52,7 @@ const RandomCard = ({
               <MoreBtn navigation={navigation} />
             </>
           ) : (
-            <MenuView menus={menus}  />
+            <MenuView menus={menus} />
           )}
         </View>
       </Pressable>
@@ -58,7 +69,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: RandomCardColor.background,
     borderRadius: 30,
-    padding: 30,
+    padding: 25,
     shadowColor: RandomCardColor.shadow,
     shadowOffset: {
       width: 0,
@@ -68,12 +79,21 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  rowend: {
+  rowstart: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  nameContainer: {
+    flex: 10,
+  },
+  distanceLikeButtonContainer: {
+    flex: 3,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   spaceBetween: {
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   name: {
     color: RandomCardColor.name,
@@ -91,6 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 20,
+    marginTop: 5,
   },
 });
 
