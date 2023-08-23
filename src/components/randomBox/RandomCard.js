@@ -16,6 +16,7 @@ const RandomCard = ({
   navigation,
   restaurantId,
   onLikeChanged,
+  kakaoShopId,
 }) => {
   const formattedName = name.split(' ').join('\n');
   return (
@@ -49,7 +50,7 @@ const RandomCard = ({
           {detail ? (
             <>
               <KakaoMap currentCoord={coords} />
-              <MoreBtn navigation={navigation} />
+              <MoreBtn navigation={navigation} kakaoShopId={kakaoShopId} />
             </>
           ) : (
             <MenuView menus={menus} />
